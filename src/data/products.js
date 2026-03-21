@@ -15,6 +15,8 @@ export const products = [
       stars: 5,
       count: 11,
     },
+    isOnSale: true,
+    oldPriceInCents: 109803,
   },
   {
     id: "ri001",
@@ -32,6 +34,8 @@ export const products = [
       stars: 5,
       count: 6,
     },
+    isOnSale: true,
+    oldPriceInCents: 95245,
   },
   {
     id: "ri002",
@@ -66,6 +70,8 @@ export const products = [
       stars: 0,
       count: 0,
     },
+    isOnSale: true,
+    oldPriceInCents: 151889,
   },
   {
     id: "ri004",
@@ -100,6 +106,8 @@ export const products = [
       stars: 5,
       count: 14,
     },
+    isOnSale: true,
+    oldPriceInCents: 91736,
   },
   {
     id: "ri006",
@@ -117,6 +125,7 @@ export const products = [
       stars: 5,
       count: 4,
     },
+    isNew: true,
   },
   {
     id: "ri007",
@@ -185,6 +194,8 @@ export const products = [
       stars: 5,
       count: 17,
     },
+    isOnSale: true,
+    oldPriceInCents: 102796,
   },
   {
     id: "ri011",
@@ -218,6 +229,8 @@ export const products = [
       stars: 5,
       count: 2,
     },
+    isOnSale: true,
+    oldPriceInCents: 107098,
   },
   {
     id: "ri013",
@@ -235,6 +248,8 @@ export const products = [
       stars: 5,
       count: 7,
     },
+    isOnSale: true,
+    oldPriceInCents: 98595,
   },
   {
     id: "br001",
@@ -252,6 +267,7 @@ export const products = [
       stars: 5,
       count: 1,
     },
+    isNew: true,
   },
   {
     id: "br002",
@@ -269,6 +285,9 @@ export const products = [
       stars: 5,
       count: 20,
     },
+    isOnSale: true,
+    oldPriceInCents: 334820,
+    isNew: true,
   },
   {
     id: "br003",
@@ -286,6 +305,8 @@ export const products = [
       stars: 5,
       count: 2,
     },
+    isOnSale: true,
+    oldPriceInCents: 497007,
   },
   {
     id: "br004",
@@ -303,6 +324,7 @@ export const products = [
       stars: 5,
       count: 3,
     },
+    isNew: true,
   },
   {
     id: "br005",
@@ -336,6 +358,9 @@ export const products = [
       stars: 5,
       count: 57,
     },
+    isOnSale: true,
+    oldPriceInCents: 84162,
+    isNew: true,
   },
   {
     id: "br007",
@@ -370,6 +395,7 @@ export const products = [
       stars: 5,
       count: 11,
     },
+    isNew: true,
   },
   {
     id: "br009",
@@ -404,6 +430,7 @@ export const products = [
       stars: 5,
       count: 1,
     },
+    isNew: true,
   },
   {
     id: "br011",
@@ -421,6 +448,7 @@ export const products = [
       stars: 4,
       count: 24,
     },
+    isNew: true,
   },
   {
     id: "br012",
@@ -438,6 +466,8 @@ export const products = [
       stars: 5,
       count: 20,
     },
+    isOnSale: true,
+    oldPriceInCents: 95455,
   },
   {
     id: "br013",
@@ -506,6 +536,9 @@ export const products = [
       stars: 5,
       count: 117,
     },
+    isOnSale: true,
+    oldPriceInCents: 124454,
+    isNew: true,
   },
   {
     id: "br017",
@@ -540,6 +573,9 @@ export const products = [
       stars: 5,
       count: 5,
     },
+    isOnSale: true,
+    oldPriceInCents: 73361,
+    isNew: true,
   },
   {
     id: "br019",
@@ -574,6 +610,8 @@ export const products = [
       stars: 5,
       count: 1,
     },
+    isOnSale: true,
+    oldPriceInCents: 76149,
   },
   {
     id: "ba001",
@@ -608,6 +646,8 @@ export const products = [
       stars: 0,
       count: 0,
     },
+    isOnSale: true,
+    oldPriceInCents: 215075,
   },
   {
     id: "er001",
@@ -625,6 +665,8 @@ export const products = [
       stars: 0,
       count: 0,
     },
+    isOnSale: true,
+    oldPriceInCents: 86390,
   },
   {
     id: "er002",
@@ -642,6 +684,8 @@ export const products = [
       stars: 5,
       count: 16,
     },
+    isOnSale: true,
+    oldPriceInCents: 109551,
   },
   {
     id: "er003",
@@ -659,6 +703,9 @@ export const products = [
       stars: 5,
       count: 1,
     },
+    isOnSale: true,
+    oldPriceInCents: 90630,
+    isNew: true,
   },
   {
     id: "er004",
@@ -693,6 +740,8 @@ export const products = [
       stars: 5,
       count: 4,
     },
+    isOnSale: true,
+    oldPriceInCents: 195127,
   },
   {
     id: "er006",
@@ -727,6 +776,7 @@ export const products = [
       stars: 5,
       count: 5,
     },
+    isNew: true,
   },
   {
     id: "er008",
@@ -744,6 +794,9 @@ export const products = [
       stars: 0,
       count: 0,
     },
+    isOnSale: true,
+    oldPriceInCents: 82260,
+    isNew: true,
   },
   {
     id: "er009",
@@ -761,6 +814,8 @@ export const products = [
       stars: 0,
       count: 0,
     },
+    isOnSale: true,
+    oldPriceInCents: 113853,
   },
   {
     id: "er010",
@@ -778,6 +833,7 @@ export const products = [
       stars: 5,
       count: 2,
     },
+    isNew: true,
   },
   {
     id: "er011",
@@ -795,6 +851,8 @@ export const products = [
       stars: 5,
       count: 4,
     },
+    isOnSale: true,
+    oldPriceInCents: 89294,
   },
   {
     id: "er012",
@@ -880,6 +938,8 @@ export const products = [
       stars: 5,
       count: 29,
     },
+    isOnSale: true,
+    oldPriceInCents: 108766,
   },
   {
     id: "ne005",
@@ -914,6 +974,8 @@ export const products = [
       stars: 5,
       count: 183,
     },
+    isOnSale: true,
+    oldPriceInCents: 108384,
   },
   {
     id: "ne007",
@@ -931,6 +993,7 @@ export const products = [
       stars: 5,
       count: 68,
     },
+    isNew: true,
   },
   {
     id: "ne008",
@@ -948,6 +1011,8 @@ export const products = [
       stars: 5,
       count: 12,
     },
+    isOnSale: true,
+    oldPriceInCents: 104987,
   },
   {
     id: "ne009",
@@ -965,6 +1030,7 @@ export const products = [
       stars: 5,
       count: 52,
     },
+    isNew: true,
   },
   {
     id: "ne010",
@@ -999,6 +1065,7 @@ export const products = [
       stars: 5,
       count: 2,
     },
+    isNew: true,
   },
   {
     id: "ne012",
@@ -1016,6 +1083,9 @@ export const products = [
       stars: 5,
       count: 11,
     },
+    isOnSale: true,
+    oldPriceInCents: 123160,
+    isNew: true,
   },
   {
     id: "se001",
@@ -1033,6 +1103,7 @@ export const products = [
       stars: 5,
       count: 22,
     },
+    isNew: true,
   },
   {
     id: "se002",
@@ -1084,6 +1155,9 @@ export const products = [
       stars: 5,
       count: 15,
     },
+    isOnSale: true,
+    oldPriceInCents: 293226,
+    isNew: true,
   },
   {
     id: "se005",
@@ -1101,6 +1175,9 @@ export const products = [
       stars: 5,
       count: 9,
     },
+    isOnSale: true,
+    oldPriceInCents: 333614,
+    isNew: true,
   },
   {
     id: "se006",
@@ -1118,5 +1195,9 @@ export const products = [
       stars: 5,
       count: 3,
     },
+    isOnSale: true,
+    oldPriceInCents: 378519,
   },
 ];
+
+export default products;
