@@ -1,17 +1,12 @@
 import { useState } from "react";
-import Button from "./components/ui/Button";
 import Container from "./components/ui/Container";
-import Navbar from "./layout/Navbar";
 import Layout from "./layout/Layout";
-import ProductCard from "./components/prodcut/ProductCard";
-import { products } from "./data/prodcuts";
+import Home from "./pages/HomePage/Home";
 
-function App() {
+export default function App() {
   return (
-    <Container>
-      <Layout></Layout>
-    </Container>
+    <Layout>
+      <Home />
+    </Layout>
   );
 }
-
-export default App;

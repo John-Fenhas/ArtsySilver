@@ -1,8 +1,5 @@
 import Container from "../components/ui/Container";
 
-import facebookIcon from "../assets/facebook-icon.svg";
-import instagramIcon from "../assets/instagram-icon.svg";
-
 function Footer() {
   return (
     <footer className="bg-white">
@@ -57,11 +54,19 @@ function Footer() {
 
             <div className="flex">
               <button className="border border-gray-300 border-r-0 rounded-l-md p-2 hover:bg-gray-100 cursor-pointer">
-                <img src={facebookIcon} alt="Facebook" className="h-4 w-4" />
+                <img
+                  src="https://rjkfpympkaiwclrnhulw.supabase.co/storage/v1/object/public/general/facebook-icon.svg"
+                  alt="Facebook"
+                  className="h-4 w-4"
+                />
               </button>
 
               <button className="border border-gray-300 rounded-r-md p-2 hover:bg-gray-100 cursor-pointer">
-                <img src={instagramIcon} alt="Instagram" className="h-4 w-4" />
+                <img
+                  src="https://rjkfpympkaiwclrnhulw.supabase.co/storage/v1/object/public/general/instagram-icon.svg"
+                  alt="Instagram"
+                  className="h-4 w-4"
+                />
               </button>
             </div>
           </div>
