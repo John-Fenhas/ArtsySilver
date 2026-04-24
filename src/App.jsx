@@ -1,12 +1,37 @@
-import { useState } from "react";
-import Container from "./components/ui/Container";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./layout/Layout";
 import Home from "./pages/HomePage/Home";
+import Shop from "./pages/ShopPage/Shop";
+
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import { Children } from "react";
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/shop",
+        element: <Shop />,
+      },
+    ],
+  },
+]);
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }

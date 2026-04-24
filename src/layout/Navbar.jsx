@@ -1,4 +1,4 @@
-import Container from "../components/ui/Container";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -15,11 +15,21 @@ function Navbar() {
 
         {/* NAV LINKS */}
         <nav className="flex gap-6 text-sm font-mono font-light">
-          <a href="#">New Arrivals</a>
-          <a href="#">Shop</a>
-          <a href="#">Gift Guide</a>
-          <a href="#">Trending</a>
-          <a href="#">About</a>
+          <Link to="/shop">
+            <p>New Arrivals</p>
+          </Link>
+          <Link to="/shop">
+            <p>Shop</p>
+          </Link>
+          <Link to="/shop">
+            <p>Gift Guide</p>
+          </Link>
+          <Link to="/shop">
+            <p>Trending</p>
+          </Link>
+          <Link to="/shop">
+            <p>About</p>
+          </Link>
         </nav>
 
         {/* RIGHT ICONS */}

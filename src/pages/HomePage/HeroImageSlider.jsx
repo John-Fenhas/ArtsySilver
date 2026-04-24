@@ -13,7 +13,7 @@ export default function HeroSlider() {
   ];
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full">
       <Swiper
         modules={[Autoplay, Pagination]}
         loop={true}
@@ -22,10 +22,12 @@ export default function HeroSlider() {
       >
         {slides.map((img, i) => (
           <SwiperSlide key={i}>
-            <div
+            <img className="w-full h-auto scale-100" src={img} />
+
+            {/* <div
               className="w-full h-full bg-auto bg-center scale-100 relative"
               style={{ backgroundImage: `url(${img})` }}
-            ></div>
+            ></div> */}
           </SwiperSlide>
         ))}
       </Swiper>

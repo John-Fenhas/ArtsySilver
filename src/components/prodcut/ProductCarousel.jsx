@@ -6,12 +6,19 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import ProductCard from "./ProductCard";
+import SkeletonProductCard from "./skeletonProductCard";
+import { useEffect } from "react";
 
-export default function ProductCarousel({ products }) {
+export default function ProductCarousel({ products, isLoading }) {
   return (
-    <div className="relative group">
+    <div className="relative group min-h-72">
       {/* NAV BUTTONS */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
+      <div
+        className="
+      z-10 pointer-events-none hidden h-auto
+      lg:absolute lg:inset-0 lg:block lg:h-auto
+      "
+      >
         {/* LEFT */}
         <button className="product-prev pointer-events-auto absolute -left-3 top-1/3 -translate-y-1/2">
           <div
@@ -51,7 +58,7 @@ export default function ProductCarousel({ products }) {
         </button>
       </div>
 
-      <div className="relative left-1/2 -translate-x-1/2 w-screen lg:left-0 lg:translate-x-0 lg:w-auto">
+      <div className="relative left-[47%] -translate-x-[47%] w-screen lg:left-0 lg:translate-x-0 lg:w-auto">
         <Swiper
           modules={[Navigation]}
           navigation={{
@@ -62,40 +69,38 @@ export default function ProductCarousel({ products }) {
           speed={500}
           grabCursor={true}
           breakpoints={{
-            //MOBILE
             0: {
-              slidesOffsetBefore: 40,
-              slidesOffsetAfter: 40,
+              slidesPerView: 1.5,
+              slidesOffsetBefore: 20,
+              slidesOffsetAfter: 20,
             },
             640: {
-              slidesOffsetBefore: 80,
-              slidesOffsetAfter: 80,
+              slidesPerView: 2,
+              slidesOffsetBefore: 22,
+              slidesOffsetAfter: 22,
             },
             768: {
-              slidesOffsetBefore: 120,
-              slidesOffsetAfter: 120,
+              slidesPerView: 2,
+              slidesOffsetBefore: 24,
+              slidesOffsetAfter: 24,
             },
-
-            //DESKTOP
             1024: {
               slidesPerView: 4,
               slidesPerGroup: 4,
             },
           }}
         >
-          {products.map((product) => (
-            <SwiperSlide
-              key={product.id}
-              className="
-                w-1/2!
-                sm:w-1/3!
-                md:w-1/3!
-                lg:w-[calc(25%-12px)]!
-              "
-            >
-              <ProductCard product={product} />
-            </SwiperSlide>
-          ))}
+          {isLoading
+            ? Array.from({ length: 12 }).map((_, i) => (
+                <SwiperSlide key={i} className="h-auto">
+                  <SkeletonProductCard />
+                </SwiperSlide>
+              ))
+            : products.map((product) => (
+                <SwiperSlide key={product.id}>
+                  <ProductCard product={product} />
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </div>
