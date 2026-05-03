@@ -17,11 +17,11 @@ export default function FilterBlock({
   }, [isOpen, children]);
 
   return (
-    <div className="border-b border-gray-200 py-4 ">
+    <div className="border-b border-gray-200 py-4">
       {/* Header */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between text-left"
+        className="w-full flex items-center justify-between text-left cursor-pointer"
       >
         <span className="font-semibold">{title}</span>
 
@@ -35,14 +35,14 @@ export default function FilterBlock({
             focusable="false"
             width="12"
             height="8"
-            class="icon icon--chevron icon--inline  "
+            className="icon icon--chevron icon--inline  "
             viewBox="0 0 12 8"
           >
             <path
               fill="none"
               d="M1 1l5 5 5-5"
               stroke="currentColor"
-              stroke-width="1.6"
+              strokeWidth="1.6"
             ></path>
           </svg>
         </span>
