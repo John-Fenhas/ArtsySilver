@@ -1,7 +1,7 @@
 import ProductGrid from "./productGrid";
 import ProductHeader from "./ProductHeader";
 
-export default function ProductSection({ products, isLoading }) {
+export default function ShopProductSection({ products, isLoading }) {
   return (
     <>
       <ProductHeader />

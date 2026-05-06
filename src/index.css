@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+body {
+  font-family:
+    "system_ui",
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    "Noto Sans",
+    "Liberation Sans",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+
+  letter-spacing: 1px;
+}
+
 /*Skelton animation*/
 @keyframes shimmer {
   0% {

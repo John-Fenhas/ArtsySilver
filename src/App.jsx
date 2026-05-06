@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Children } from "react";
+import ProductPage from "./pages/ProductPage/Product";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/product/:category/:slug",
+        element: <ProductPage />,
       },
     ],
   },

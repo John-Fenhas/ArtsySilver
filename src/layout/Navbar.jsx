@@ -14,7 +14,7 @@ function Navbar() {
         </a>
 
         {/* NAV LINKS */}
-        <nav className="flex gap-6 text-sm font-mono font-light">
+        <nav className="flex gap-6 text-sm font-light">
           <Link to="/shop">
             <p>New Arrivals</p>
           </Link>

@@ -1,5 +1,5 @@
 import { Layout } from "lucide-react";
-import BreadCrumb from "../../layout/Breadcrumb";
+import BreadCrumb from "../../components/ui/Breadcrumb";
 import ShopLayout from "../../layout/ShopLayout";
 import FilterSidebar from "./FilterSiderbar";
 import ShopProductSection from "./ShopProductSection";
