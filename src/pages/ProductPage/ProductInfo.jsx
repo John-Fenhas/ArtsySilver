@@ -4,10 +4,8 @@ import CollapsibleBlock from "../../components/ui/CollapsibleBlock";
 
 export default function ProductInfo({ productData, isLoading }) {
   if (isLoading) {
-    console.log("Loading");
     return;
   }
-  console.log(productData);
   return (
     <div className="w-max min-w-11/12 max-w-full">
       <div className="border-b border-gray-300 pb-6 mb-12">
@@ -264,11 +262,11 @@ export default function ProductInfo({ productData, isLoading }) {
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
               id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               <path d="M20.445 5h-8.891A6.559 6.559 0 0 0 5 11.554v8.891A6.559 6.559 0 0 0 11.554 27h8.891a6.56 6.56 0 0 0 6.554-6.555v-8.891A6.557 6.557 0 0 0 20.445 5zm4.342 15.445a4.343 4.343 0 0 1-4.342 4.342h-8.891a4.341 4.341 0 0 1-4.341-4.342v-8.891a4.34 4.34 0 0 1 4.341-4.341h8.891a4.342 4.342 0 0 1 4.341 4.341l.001 8.891z"></path>

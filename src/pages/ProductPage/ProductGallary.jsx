@@ -12,7 +12,6 @@ export default function ProductGallery({ productData, isLoading }) {
   if (isLoading) {
     return <GallarySkeleton />;
   }
-  console.log(productData);
 
   const images = productData.images;
 

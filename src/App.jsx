@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { Children } from "react";
 import ProductPage from "./pages/ProductPage/Product";
+import { CartProvider } from "./Context/CartContext";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +36,10 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <CartProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </CartProvider>
   );
 }
