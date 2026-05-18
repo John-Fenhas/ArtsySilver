@@ -1,32 +1,81 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
 import cartReducer from "./CartReducer";
+import { getProducts } from "../data/products";
+import { useQuery } from "@tanstack/react-query";
 
 const CartContext = createContext();
 
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem("cart")) || [];
 export function CartProvider({ children }) {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [cart, dispatch] = useReducer(cartReducer, initialState);
   useEffect(() => {
-    console.log("Cart updated:", cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log(localStorage.getItem("cart"));
   }, [cart]);
 
+  // useEffect(() => {
+  //   console.log("Cart updated:", cart);
+  // }, [cart]);
+  // useEffect(() => {
+  //   console.log("Cart open:", isCartOpen);
+  // }, [isCartOpen]);
+
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
+  if (isLoading) {
+    return;
+  }
+
+  function handleCartView() {
+    setIsCartOpen(!isCartOpen);
+  }
+
   function addToCart(id) {
+    const product = products.find((product) => product.id === id);
+
     dispatch({
       type: "ADD_ITEM",
-      payload: id,
+      payload: {
+        id: id,
+        onSale: product.is_on_sale,
+        oldPrice: product.old_price_in_cents,
+        price: product.price_in_cents,
+        inStock: product.in_stock,
+      },
+    });
+  }
+
+  function decreaseItem(id) {
+    dispatch({
+      type: "DECREASE_ITEM",
+      payload: {
+        id: id,
+      },
     });
   }
 
   function removeFromCart(id) {
     dispatch({
       type: "REMOVE_ITEM",
-      payload: id,
+      payload: {
+        id: id,
+      },
     });
   }
+
   function clearCart() {
     dispatch({
       type: "CLEAR_CART",
-      payload: id,
     });
   }
 
@@ -34,7 +83,10 @@ export function CartProvider({ children }) {
     <CartContext.Provider
       value={{
         cart,
+        isCartOpen,
+        handleCartView,
         addToCart,
+        decreaseItem,
         removeFromCart,
         clearCart,
       }}

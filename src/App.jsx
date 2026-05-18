@@ -36,10 +36,10 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <CartProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
         <RouterProvider router={router} />
-      </QueryClientProvider>
-    </CartProvider>
+      </CartProvider>
+    </QueryClientProvider>
   );
 }
