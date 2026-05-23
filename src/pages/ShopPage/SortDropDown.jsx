@@ -1,19 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 
 const sortOptions = [
-  { label: "Flash Sale", value: "flash-sale" },
-  { label: "Alphabetically, A-Z", value: "alpha-a-z" },
-  { label: "Alphabetically, Z-A", value: "alpha-z-a" },
-  { label: "Price, low to high", value: "price-descending" },
-  { label: "Price, high to low", value: "price-assending" },
+  { label: "Featured", value: "featured" },
+  { label: "Flash Sale", value: "flashSale" },
+  { label: "Alphabetically, A-Z", value: "alphabetical-AZ" },
+  { label: "Alphabetically, Z-A", value: "alphabetical-ZA" },
+  { label: "Price, high to low", value: "priceAssending" },
+  { label: "Price, low to high", value: "priceDescending" },
 ];
 
-export default function SortDropDown({ value = "", onChange }) {
+export default function SortDropDown({ sortProducts }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const currentValue = value === "" ? "Flash Sale" : value;
+
+  const [currentValue, setCurrentValue] = useState("Featured");
   let selected = sortOptions.find((option) => option.label === currentValue);
 
+  // outside ref click listner to close dropdown
   useEffect(() => {
     const handler = (e) => {
       if (!ref.current?.contains(e.target)) setOpen(false);
@@ -52,23 +55,27 @@ export default function SortDropDown({ value = "", onChange }) {
 
       {open && (
         <div
-          className="absolute z-10 mt-1 w-full rounded-xl bg-white shadow-sm shadow-gray-500 overflow-hidden max-h-52 overflow-y-auto"
+          className="absolute z-10 mt-1 w-full rounded-xl bg-white shadow-sm shadow-gray-500 overflow-hidden max-h-80 overflow-y-auto"
           style={{
             scrollbarWidth: "thin",
             scrollbarColor: "rgba(255,255,255,0.2) transparent",
           }}
         >
-          {sortOptions.map((d) => (
+          {sortOptions.map((option) => (
             <div
-              key={d.value}
+              key={option.value}
               onClick={() => {
-                onChange(d.value);
+                sortProducts(option.value);
                 setOpen(false);
+                setCurrentValue(option.label);
+                console.log(option.value);
+                console.log(value);
+                console.log(selected);
               }}
               className="flex items-center px-4 py-2 cursor-pointer hover:bg-white/5 transition"
             >
               <span className={`px-2 py-0.5 rounded text-gray-800 text-sm`}>
-                {d.label}
+                {option.label}
               </span>
             </div>
           ))}

@@ -1,11 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getPrice from "../../utils/formatPrice";
 import CollapsibleBlock from "../../components/ui/CollapsibleBlock";
+import { useCart } from "../../Context/CartContext";
 
 export default function ProductInfo({ productData, isLoading }) {
   if (isLoading) {
     return;
   }
+
+  const {
+    cart,
+    isCartOpen,
+    handleCartView,
+    addToCart,
+    decreaseItem,
+    removeFromCart,
+    clearCart,
+  } = useCart();
+
+  const productAlreadyInCart = cart.find((item) => item.id === productData.id);
+
+  const [quantity, setQuantity] = useState(productAlreadyInCart?.quantity || 1);
+
+  function reduceQuantity() {
+    if (quantity < 1) {
+      setQuantity(1);
+    }
+    setQuantity((prev) => prev - 1);
+  }
+  function addQunatity() {
+    setQuantity((prev) => prev + 1);
+  }
+
   return (
     <div className="w-max min-w-11/12 max-w-full">
       <div className="border-b border-gray-300 pb-6 mb-12">
@@ -69,7 +95,17 @@ export default function ProductInfo({ productData, isLoading }) {
       <div className="pb-12">
         <span className="block text-xs font-medium">Quantity:</span>
         <div className="flex items-center py-2">
-          <div className="flex justify-center items-center h-12 w-12 text-4xl rounded-s-2xl border border-gray-300 border-r-0">
+          <div
+            className="flex justify-center items-center h-12 w-12 text-4xl rounded-s-2xl border border-gray-300 border-r-0 cursor-pointer"
+            onClick={
+              productAlreadyInCart
+                ? () => {
+                    decreaseItem(productData.id, quantity - 1);
+                    reduceQuantity();
+                  }
+                : () => reduceQuantity()
+            }
+          >
             <svg
               width="16px"
               height="16px"
@@ -96,9 +132,19 @@ export default function ProductInfo({ productData, isLoading }) {
             </svg>
           </div>
           <span className="flex justify-center items-center text-sm h-12 px-4 border-y border-gray-300">
-            34
+            {productAlreadyInCart ? productAlreadyInCart.quantity : quantity}
           </span>
-          <div className="flex justify-center items-center h-12 w-12 text-2xl rounded-e-2xl border border-gray-300 border-l-0">
+          <div
+            className="flex justify-center items-center h-12 w-12 text-2xl rounded-e-2xl border border-gray-300 border-l-0 cursor-pointer"
+            onClick={
+              productAlreadyInCart
+                ? () => {
+                    addToCart(productData.id, quantity + 1);
+                    addQunatity();
+                  }
+                : () => addQunatity()
+            }
+          >
             <svg
               width="16px"
               height="16px"
@@ -127,10 +173,21 @@ export default function ProductInfo({ productData, isLoading }) {
         </div>
       </div>
       <div>
-        <div className="flex justify-center items-center bg-[rgb(197,194,194)] h-14 rounded-3xl font-bold text-sm mb-3">
+        <div
+          className="flex justify-center items-center bg-[rgb(197,194,194)] h-14 rounded-3xl font-bold text-sm mb-3 cursor-pointer"
+          onClick={() => {
+            addToCart(productData.id, quantity);
+          }}
+        >
           ADD TO CART
         </div>
-        <div className="flex justify-center items-center bg-black h-14 rounded-3xl font-bold text-sm text-white my-3">
+        <div
+          className="flex justify-center items-center bg-black h-14 rounded-3xl font-bold text-sm text-white my-3 cursor-pointer"
+          onClick={() => {
+            addToCart(productData.id, quantity);
+            handleCartView();
+          }}
+        >
           BUY IT NOW
         </div>
       </div>
@@ -192,7 +249,7 @@ export default function ProductInfo({ productData, isLoading }) {
             Please note: The warranty does not cover misuse, damage, or loss.
           </p>
         </CollapsibleBlock>
-        <CollapsibleBlock>
+        <CollapsibleBlock title={"Return & Exchange Policies"}>
           <ul className="text-xs pl-5 list-disc">
             <li className="py-3">
               We offer easy returns & exchange within 14 days after the delivery
@@ -234,7 +291,8 @@ export default function ProductInfo({ productData, isLoading }) {
           </p>
         </CollapsibleBlock>
       </div>
-      <div className="flex">
+      <div className="flex py-4 gap-1.5">
+        <span className="text-sm text-gray-500">Share</span>
         <div>
           <svg
             fill="#000000"
@@ -257,8 +315,8 @@ export default function ProductInfo({ productData, isLoading }) {
         <div>
           <svg
             fill="#000000"
-            width="64px"
-            height="64px"
+            width="20px"
+            height="20px"
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -274,9 +332,55 @@ export default function ProductInfo({ productData, isLoading }) {
             </g>
           </svg>
         </div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>
+          <svg
+            fill="#666"
+            height="18px"
+            width="18px"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            viewBox="-271 296.6 256.4 208.4"
+            xmlSpace="preserve"
+          >
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M-14.6,321.2c-9.4,4.2-19.6,7-30.2,8.3c10.9-6.5,19.2-16.8,23.1-29.1c-10.2,6-21.4,10.4-33.4,12.8 c-9.6-10.2-23.3-16.6-38.4-16.6c-29,0-52.6,23.6-52.6,52.6c0,4.1,0.4,8.1,1.4,12c-43.7-2.2-82.5-23.1-108.4-55 c-4.5,7.8-7.1,16.8-7.1,26.5c0,18.2,9.3,34.3,23.4,43.8c-8.6-0.3-16.7-2.7-23.8-6.6v0.6c0,25.5,18.1,46.8,42.2,51.6 c-4.4,1.2-9.1,1.9-13.9,1.9c-3.4,0-6.7-0.3-9.9-0.9c6.7,20.9,26.1,36.1,49.1,36.5c-18,14.1-40.7,22.5-65.3,22.5 c-4.2,0-8.4-0.2-12.6-0.7c23.3,14.9,50.9,23.6,80.6,23.6c96.8,0,149.7-80.2,149.7-149.7c0-2.3,0-4.6-0.1-6.8 C-30.5,341-21.6,331.8-14.6,321.2"></path>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <svg
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#666"
+            strokeWidth="0.00024000000000000003"
+          >
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M3.5 12C3.5 7.30558 7.30558 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.9716 20.5 9.98587 20.3174 9.07345 19.9828C9.64822 18.4359 10.2115 16.8847 10.7517 15.3255C11.326 15.7348 12.0668 16 13 16C14.935 16 16.9749 14.7247 17.4806 12.1961C18.1155 9.02148 15.5728 6 12 6C10.4972 6 9.01887 6.6037 7.91298 7.56243C6.80483 8.52311 6 9.90687 6 11.5C6 12.2746 6.23394 13.1378 6.79149 13.7057C7.17707 14.0919 7.82087 14.0933 8.20711 13.7071C8.59019 13.324 8.59749 12.7074 8.22899 12.3155C7.44315 11.3348 8.47852 9.71907 9.22306 9.07361C9.99585 8.40366 11.0175 8 12 8C14.4272 8 15.8845 9.97852 15.5194 11.8039C15.2165 13.3183 14.065 14 13 14C12.1821 14 11.7416 13.6547 11.4599 13.208C11.6137 12.7237 11.7454 12.2838 11.8387 11.9263C12.0311 11.1886 12.1473 10.3002 11.4839 9.7474C10.9908 9.33644 10.4087 9.42759 10.0528 9.60557C9.39135 9.93629 9 10.7099 9 11.5C9 11.9414 9.06873 12.6253 9.31675 13.3315C8.67824 15.258 7.98579 17.167 7.27924 19.0696C5.00045 17.5449 3.5 14.9477 3.5 12ZM12 1.5C6.20101 1.5 1.5 6.20101 1.5 12C1.5 17.799 6.20101 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5Z"
+                fill="#666"
+              ></path>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
   );

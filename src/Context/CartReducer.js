@@ -1,8 +1,11 @@
 export default function cartReducer(cartItems, action) {
-  const productID = action.payload.id;
-  const productOnSale = action.payload.onSale;
-  const productOldPrice = action.payload.oldPrice;
-  const productPrice = action.payload.price;
+  const {
+    id: productID,
+    onSale: productOnSale,
+    oldPrice: productOldPrice,
+    price: productPrice,
+    quantity: productQuantity,
+  } = action.payload || {};
   // boolian for checking if the product is already in the cart
   const actionProductExist = cartItems.find((item) => item.id === productID);
 
@@ -11,7 +14,7 @@ export default function cartReducer(cartItems, action) {
       if (actionProductExist) {
         return cartItems.map((item) =>
           item.id === productID
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: productQuantity || item.quantity + 1 }
             : item,
         );
       }
@@ -22,10 +25,17 @@ export default function cartReducer(cartItems, action) {
           onSale: productOnSale,
           oldPrice: productOldPrice,
           price: productPrice,
-          quantity: 1,
+          quantity: productQuantity || 1,
         },
       ];
     }
+
+    // case "CHANGE_QUANTITY": {
+    //   return cartItems.map((item) =>
+    //     item.id === productID ? { ...item, quantity: productQuantity } : item,
+    //   );
+    // }
+
     case "REMOVE_ITEM": {
       console.log(productID);
 
@@ -35,7 +45,7 @@ export default function cartReducer(cartItems, action) {
       if (actionProductExist.quantity >= 2) {
         return cartItems.map((item) =>
           item.id === productID
-            ? { ...item, quantity: item.quantity - 1 }
+            ? { ...item, quantity: productQuantity || item.quantity - 1 }
             : item,
         );
       }

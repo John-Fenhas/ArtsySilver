@@ -4,6 +4,9 @@ import { useCart } from "../../Context/CartContext";
 
 export default function ProductCard({ product, className = "w-full" }) {
   const { cart, addToCart, removeFromCart, clearCart } = useCart();
+
+  const productAlreadyInCart = cart.find((item) => item.id === product.id);
+
   return (
     <div className={`${className}`}>
       <div className="relative group/card overflow-hidden rounded-md cursor-pointer w-full">
@@ -36,7 +39,9 @@ export default function ProductCard({ product, className = "w-full" }) {
             cursor-pointer
             group-hover
             `}
-          onClick={() => addToCart(product.id)}
+          onClick={() =>
+            addToCart(product.id, productAlreadyInCart.quantity + 1)
+          }
         >
           + Add To Cart
         </button>
@@ -49,9 +54,20 @@ export default function ProductCard({ product, className = "w-full" }) {
           </p>
         </Link>
 
-        <p className="text-gray-800 text-xs">
-          {getPrice(product.price_in_cents)} EGP
-        </p>
+        {product.is_on_sale ? (
+          <div className="flex gap-1">
+            <span className="text-red-700 text-xs">
+              {getPrice(product.price_in_cents)}
+            </span>
+            <span className="text-gray-800 line-through text-xs">
+              {getPrice(product.old_price_in_cents)}
+            </span>
+          </div>
+        ) : (
+          <p className="text-gray-800 text-xs">
+            {getPrice(product.price_in_cents)} EGP
+          </p>
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import ProductInfo from "./ProductInfo";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../data/products";
 import GallarySkeleton from "./GallarySkeleton";
+import ProductsSection from "../../components/prodcut/ProductsSection";
 
 export default function ProductPage() {
   const param = useParams();
@@ -15,6 +16,10 @@ export default function ProductPage() {
   });
 
   const productData = products?.find((p) => p.slug === param.slug);
+
+  const similarItems = products?.filter(
+    (item) => item.category === productData.category,
+  );
 
   return (
     <div className="w-10/12 min-h-fit mx-auto">
@@ -27,6 +32,11 @@ export default function ProductPage() {
           <ProductInfo isLoading={isLoading} productData={productData} />
         </div>
       </div>
+      <ProductsSection
+        title="Similar Items"
+        products={similarItems}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

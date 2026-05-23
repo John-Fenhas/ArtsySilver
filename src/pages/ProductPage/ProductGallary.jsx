@@ -9,6 +9,7 @@ import GallarySkeleton from "./GallarySkeleton";
 
 export default function ProductGallery({ productData, isLoading }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   if (isLoading) {
     return <GallarySkeleton />;
   }
@@ -25,14 +26,18 @@ export default function ProductGallery({ productData, isLoading }) {
         thumbs={{ swiper: thumbsSwiper }}
         className="mb-3"
       >
-        {images.map((img, i) => (
-          <SwiperSlide key={i}>
-            <img
-              src={img.url}
-              className="w-full h-auto object-contain rounded-lg mx-auto"
-            />
-          </SwiperSlide>
-        ))}
+        {isLoading ? (
+          <GallarySkeleton />
+        ) : (
+          images.map((img, i) => (
+            <SwiperSlide key={i}>
+              <img
+                src={img.url}
+                className="w-full h-auto object-contain rounded-lg mx-auto"
+              />
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
 
       {/* THUMBNAILS */}

@@ -17,7 +17,6 @@ export function CartProvider({ children }) {
   const [cart, dispatch] = useReducer(cartReducer, initialState);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-    console.log(localStorage.getItem("cart"));
   }, [cart]);
 
   // useEffect(() => {
@@ -40,13 +39,14 @@ export function CartProvider({ children }) {
     setIsCartOpen(!isCartOpen);
   }
 
-  function addToCart(id) {
+  function addToCart(id, quantity) {
     const product = products.find((product) => product.id === id);
 
     dispatch({
       type: "ADD_ITEM",
       payload: {
         id: id,
+        quantity: quantity,
         onSale: product.is_on_sale,
         oldPrice: product.old_price_in_cents,
         price: product.price_in_cents,
@@ -55,11 +55,12 @@ export function CartProvider({ children }) {
     });
   }
 
-  function decreaseItem(id) {
+  function decreaseItem(id, quantity) {
     dispatch({
       type: "DECREASE_ITEM",
       payload: {
         id: id,
+        quantity: quantity,
       },
     });
   }

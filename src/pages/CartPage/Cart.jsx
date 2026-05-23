@@ -42,7 +42,6 @@ export default function Cart() {
     cartItemCount += item.quantity;
   });
 
-  console.log(cart);
   let total = 0;
   cart.forEach((item) => {
     total += item.price;

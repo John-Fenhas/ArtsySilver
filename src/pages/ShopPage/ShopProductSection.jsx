@@ -1,10 +1,19 @@
 import ProductGrid from "./productGrid";
 import ProductHeader from "./ProductHeader";
 
-export default function ShopProductSection({ products, isLoading }) {
+export default function ShopProductSection({
+  products,
+  isLoading,
+  sortProducts,
+}) {
+  const productNumber = products.length;
+
   return (
     <>
-      <ProductHeader />
+      <ProductHeader
+        productNumber={productNumber}
+        sortProducts={sortProducts}
+      />
       <ProductGrid isLoading={isLoading} products={products} />
     </>
   );
