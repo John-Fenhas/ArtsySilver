@@ -14,13 +14,13 @@ export default function ProductCard({ product, className = "w-full" }) {
           <img
             src={product.images[0].url}
             alt={product.name}
-            className="w-full aspect-[1/1.6] object-cover transition-opacity duration-600 group-hover/card:opacity-0"
+            className="w-full aspect-[1/1.6] object-cover transition-opacity duration-800 group-hover/card:opacity-0"
           />
 
           <img
             src={product.images[1].url}
             alt={product.name}
-            className="absolute inset-0 w-full aspect-[1/1.6] object-cover opacity-0 transition-opacity duration-600 group-hover/card:opacity-100"
+            className="absolute inset-0 w-full aspect-[1/1.6] object-cover opacity-0 transition-opacity duration-800 group-hover/card:opacity-100"
           />
         </Link>
         <button

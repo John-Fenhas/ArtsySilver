@@ -69,7 +69,6 @@ export default function SortDropDown({ sortProducts }) {
                 setOpen(false);
                 setCurrentValue(option.label);
                 console.log(option.value);
-                console.log(value);
                 console.log(selected);
               }}
               className="flex items-center px-4 py-2 cursor-pointer hover:bg-white/5 transition"

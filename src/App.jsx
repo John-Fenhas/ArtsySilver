@@ -11,6 +11,7 @@ import {
 import { Children } from "react";
 import ProductPage from "./pages/ProductPage/Product";
 import { CartProvider } from "./Context/CartContext";
+import { FilteredProductsProvider } from "./Context/FilteredProductsContext";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,9 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <RouterProvider router={router} />
+        <FilteredProductsProvider>
+          <RouterProvider router={router} />
+        </FilteredProductsProvider>
       </CartProvider>
     </QueryClientProvider>
   );

@@ -1,29 +1,25 @@
 import CategoryCheckBox from "./CategoryCheckBox";
 import CollapsibleBlock from "../../components/ui/CollapsibleBlock";
 import RangeSlider from "./RangeSlider";
+import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 export default function FilterSidebar() {
+  const {
+    filteredProducts,
+    isLoading,
+    sortProducts,
+    AvailabilityFilter,
+    priceFilter,
+    sizeFilter,
+    categoryFilter,
+    clearFilters,
+  } = useFilteredProducts();
   return (
     <div>
       <p className="border-b border-gray-200 py-4 font-medium text-xl">
         Filters
       </p>
       <CollapsibleBlock title={"Availability"}>
-        <label className="flex gap-2 items-center py-1 px-3">
-          <input
-            type="checkbox"
-            name="availability"
-            className="accent-black w-3.5 h-3.5"
-          />
-          In Stock
-        </label>
-        <label className="flex gap-2 items-center py-1 px-3">
-          <input
-            type="checkbox"
-            name="availability"
-            className="accent-black w-3.5 h-3.5"
-          />
-          Out Of Stock
-        </label>
+        <AvailabilityFilter />
       </CollapsibleBlock>
       <CollapsibleBlock title={"Price"}>
         <RangeSlider />

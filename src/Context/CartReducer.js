@@ -30,12 +30,6 @@ export default function cartReducer(cartItems, action) {
       ];
     }
 
-    // case "CHANGE_QUANTITY": {
-    //   return cartItems.map((item) =>
-    //     item.id === productID ? { ...item, quantity: productQuantity } : item,
-    //   );
-    // }
-
     case "REMOVE_ITEM": {
       console.log(productID);
 

@@ -19,13 +19,6 @@ export function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // useEffect(() => {
-  //   console.log("Cart updated:", cart);
-  // }, [cart]);
-  // useEffect(() => {
-  //   console.log("Cart open:", isCartOpen);
-  // }, [isCartOpen]);
-
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
