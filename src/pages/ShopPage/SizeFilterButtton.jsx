@@ -1,0 +1,37 @@
+import { useState } from "react";
+import { useFilteredProducts } from "../../Context/FilteredProductsContext";
+
+export default function SizeFilterButton({ size }) {
+  const [isActive, setIsActive] = useState(false);
+  const { updateSizeFilter } = useFilteredProducts();
+
+  function handleClick() {
+    setIsActive((prev) => !prev);
+  }
+
+  return (
+    <>
+      {isActive ? (
+        <button
+          className="border border-gray-800 bg-gray-200 rounded-2xl py-1 text-sm font-medium cursor-pointer transition-colors duration-100"
+          onClick={() => {
+            updateSizeFilter(size);
+            handleClick();
+          }}
+        >
+          SIZE {size}
+        </button>
+      ) : (
+        <button
+          className="border border-gray-300 rounded-2xl py-1 text-sm font-medium cursor-pointer hover:bg-gray-50 transition-colors duration-100"
+          onClick={() => {
+            updateSizeFilter(size);
+            handleClick();
+          }}
+        >
+          SIZE {size}
+        </button>
+      )}
+    </>
+  );
+}

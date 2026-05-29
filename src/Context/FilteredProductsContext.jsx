@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import cartReducer from "./CartReducer";
 import { getProducts } from "../data/products";
 import { useQuery } from "@tanstack/react-query";
@@ -12,169 +12,204 @@ export function FilteredProductsProvider({ children }) {
     queryFn: getProducts,
   });
 
-  if (isLoading) {
-    return;
-  }
+  //state for filters
+  const [filters, setFilters] = useState({
+    availability: {
+      inStock: true,
+      outOfStock: true,
+    },
+    category: [],
+    size: [],
+    minPrice: 0,
+    maxPrice: 5000,
+    search: "",
+  });
 
-  const [filteredProducts, setFilteredProcucts] = useState(products);
+  //state for sorting by
+  const [sortBy, setSortBy] = useState("featured");
 
-  function sortProducts(sortBy) {
-    switch (sortBy) {
-      case "featured": {
-        setFilteredProcucts(products);
-        break;
-      }
-      case "flashSale": {
-        setFilteredProcucts(products.filter((item) => item.is_on_sale));
-        console.log(filteredProducts);
-        break;
-      }
-      case "alphabetical-AZ": {
-        const sortedProductsAZ = [...products].sort((a, b) => {
-          const aStartsWithANumber = /^\d/.test(a.name);
-          const bStartsWithANumber = /^\d/.test(b.name);
+  const filteredProducts = useMemo(() => {
+    let result = [...products];
 
-          // push numbered names to the end
-          if (aStartsWithANumber && !bStartsWithANumber) return 1;
-          if (!aStartsWithANumber && bStartsWithANumber) return -1;
-
-          // normal alphabetical sorting
-          return a.name.localeCompare(b.name);
-        });
-        setFilteredProcucts(sortedProductsAZ);
-
-        break;
-      }
-      case "alphabetical-ZA": {
-        const sortedProductsZA = [...products].sort((a, b) => {
-          const aStartsWithANumber = /^\d/.test(a.name);
-          const bStartsWithANumber = /^\d/.test(b.name);
-
-          // still keep numbered names at the end
-          if (aStartsWithANumber && !bStartsWithANumber) return 1;
-          if (!aStartsWithANumber && bStartsWithANumber) return -1;
-
-          // reverse alphabetical sorting
-          return b.name.localeCompare(a.name);
-        });
-        setFilteredProcucts(sortedProductsZA);
-        break;
-      }
-      case "priceAssending": {
-        const sortedProductsHighToLow = [...products].sort(
-          (a, b) => b.price_in_cents - a.price_in_cents,
-        );
-        setFilteredProcucts(sortedProductsHighToLow);
-
-        break;
-      }
-      case "priceDescending": {
-        const sortedProductsLowToHigh = [...products].sort(
-          (a, b) => a.price_in_cents - b.price_in_cents,
-        );
-        setFilteredProcucts(sortedProductsLowToHigh);
-
-        break;
-      }
+    //checks for in stock and out of stock...   both true or both false should not filter the products
+    if (filters.availability.inStock && !filters.availability.outOfStock) {
+      result = result.filter((item) => !item.in_stock);
     }
-  }
+    if (!filters.availability.inStock && filters.availability.outOfStock) {
+      result = result.filter((item) => item.in_stock);
+    }
 
-  function AvailabilityFilter(avail) {
-    if (avail) {
-      setFilteredProcucts(products.filter((item) => item.in_stock));
+    // checks if the item's category exists in the filter category
+    if (filters.category.length > 0) {
+      console.log(filters.category);
+      console.log(result.map((p) => p.category));
+      result = result.filter((item) =>
+        filters.category.includes(item.category),
+      );
     }
-    if (!avail) {
-      setFilteredProcucts(products.filter((item) => !item.in_stock));
-    }
-  }
-  function priceFilter(min, max) {
-    setFilteredProcucts(
-      products.filter((item) => max >= getPrice(item.price_in_cents) >= min),
-    );
-  }
-  function sizeFilter(filterSize) {
-    setFilteredProcucts(
-      products.filter((item) => {
+
+    // checks if the item is available in the size filter applied
+    if (filters.size.length > 0) {
+      result = result.filter((item) => {
+        if (!item.size) return false;
+
         const sizes = JSON.parse(item.size);
-        if (sizes.includes(filterSize)) {
-          return item;
-        }
-      }),
+
+        return sizes.some((size) => filters.size.includes(size));
+      });
+    }
+
+    //always filtering based on price with defults set
+    result = result.filter(
+      (item) =>
+        item.price_in_cents / 100 >= filters.minPrice &&
+        item.price_in_cents / 100 <= filters.maxPrice,
     );
+
+    //sorting with on_sale products first
+    if (sortBy === "flashSale") {
+      result = result.sort((a, b) => b.is_on_sale - a.is_on_sale);
+    }
+
+    //sorting Alphabetical A to Z with numbers at the end
+    if (sortBy === "alphabetical-AZ") {
+      result = result.sort((a, b) => {
+        const aStartsWithANumber = /^\d/.test(a.name);
+        const bStartsWithANumber = /^\d/.test(b.name);
+
+        // push numbered names to the end
+        if (aStartsWithANumber && !bStartsWithANumber) return 1;
+        if (!aStartsWithANumber && bStartsWithANumber) return -1;
+
+        // normal alphabetical sorting
+        return a.name.localeCompare(b.name);
+      });
+    }
+
+    //sorting Alphabetical Z to A with numbers at the end
+    if (sortBy === "alphabetical-ZA") {
+      result = result.sort((a, b) => {
+        const aStartsWithANumber = /^\d/.test(a.name);
+        const bStartsWithANumber = /^\d/.test(b.name);
+
+        // push numbered names to the end
+        if (aStartsWithANumber && !bStartsWithANumber) return 1;
+        if (!aStartsWithANumber && bStartsWithANumber) return -1;
+
+        // normal alphabetical sorting
+        return b.name.localeCompare(a.name);
+      });
+    }
+
+    //sorting price Assending
+    if (sortBy === "priceAssending") {
+      result = result.sort((a, b) => b.price_in_cents - a.price_in_cents);
+    }
+
+    //sorting price Descending
+    if (sortBy === "priceDescending") {
+      result = result.sort((a, b) => a.price_in_cents - b.price_in_cents);
+    }
+
+    //search query
+    if (filters.search.trim()) {
+      const query = filters.search.toLowerCase();
+      result = result.filter((item) => item.name.toLowerCase().includes(query));
+    }
+
+    return result;
+  }, [products, filters, sortBy]);
+
+  function toggleInStock() {
+    setFilters((prev) => ({
+      ...prev,
+      availability: {
+        inStock: !prev.availability.inStock,
+        outOfStock: prev.availability.outOfStock,
+      },
+    }));
   }
-  function categoryFilter(productCategory) {
-    setFilteredProcucts(
-      products.filter((item) => item.category === productCategory),
-    );
+
+  function toggleOutOfStock() {
+    setFilters((prev) => ({
+      ...prev,
+      availability: {
+        inStock: prev.availability.inStock,
+        outOfStock: !prev.availability.outOfStock,
+      },
+    }));
   }
+
+  function updatePriceFilter(min, max) {
+    setFilters((prev) => ({
+      ...prev,
+      minPrice: min,
+      maxPrice: max,
+    }));
+  }
+
+  function updateSizeFilter(sizeToFilterBy) {
+    if (filters.size.includes(sizeToFilterBy)) {
+      setFilters((prev) => ({
+        ...prev,
+        size: [...prev.size.filter((size) => size !== sizeToFilterBy)],
+      }));
+      return;
+    }
+    setFilters((prev) => ({
+      ...prev,
+      size: [...prev.size, sizeToFilterBy],
+    }));
+  }
+
+  function updateCategoryFilter(categoryToFilterBy) {
+    if (filters.category.includes(categoryToFilterBy)) {
+      setFilters((prev) => ({
+        ...prev,
+        category: [
+          ...prev.category.filter(
+            (category) => category !== categoryToFilterBy,
+          ),
+        ],
+      }));
+      return;
+    }
+
+    setFilters((prev) => ({
+      ...prev,
+      category: [...prev.category, categoryToFilterBy],
+    }));
+  }
+
   function clearFilters() {
-    setFilteredProcucts(products);
+    setFilters({
+      availability: {
+        inStock: true,
+        outOfStock: true,
+      },
+      category: [],
+      size: [],
+      minPrice: 0,
+      maxPrice: 5000,
+      search: "",
+    });
   }
 
-  // function filterProducts(filterBy) {
-  //   switch (filterBy) {
-  //     case "availability-inStock": {
-  //       setFilteredProcucts(products.filter((item) => item.in_stock));
-  //       break;
-  //     }
-
-  //     case "availability-outOfStock": {
-  //       setFilteredProcucts(products.filter((item) => !item.in_stock));
-  //       break;
-  //     }
-
-  //     case "size-6": {
-  //       break;
-  //     }
-  //     case "size-7": {
-  //       setFilteredProcucts(
-  //         products.filter((item) => {
-  //           const sizes = JSON.parse(item.size);
-  //           if (sizes.includes(7)) {
-  //             return item;
-  //           }
-  //         }),
-  //       );
-  //       break;
-  //     }
-  //     case "size-8": {
-  //       setFilteredProcucts(
-  //         products.filter((item) => {
-  //           const sizes = JSON.parse(item.size);
-  //           if (sizes.includes(8)) {
-  //             return item;
-  //           }
-  //         }),
-  //       );
-  //       break;
-  //     }
-  //     case "size-9": {
-  //       setFilteredProcucts(
-  //         products.filter((item) => {
-  //           const sizes = JSON.parse(item.size);
-  //           if (sizes.includes(9)) {
-  //             return item;
-  //           }
-  //         }),
-  //       );
-  //       break;
-  //     }
-
-  //     default:
-  //       break;
-  //   }
-  // }
+  function updateSortBy(sortBy) {
+    setSortBy(sortBy);
+  }
 
   return (
     <FilteredProductsContext.Provider
       value={{
         filteredProducts,
         isLoading,
-        sortProducts,
-        AvailabilityFilter,
-        priceFilter,
-        sizeFilter,
-        categoryFilter,
+        updateSortBy,
+        toggleInStock,
+        toggleOutOfStock,
+        updatePriceFilter,
+        updateSizeFilter,
+        updateCategoryFilter,
         clearFilters,
       }}
     >

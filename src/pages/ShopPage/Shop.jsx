@@ -78,27 +78,12 @@ export default function Shop() {
   //   }
   // }
 
-  const {
-    filteredProducts,
-    isLoading,
-    sortProducts,
-    AvailabilityFilter,
-    priceFilter,
-    sizeFilter,
-    categoryFilter,
-    clearFilters,
-  } = useFilteredProducts();
-
   return (
-    <Container className="pt-16 w-10/12">
+    <Container className="pt-12 w-10/12">
       <BreadCrumb />
       <ShopLayout>
         <FilterSidebar />
-        <ShopProductSection
-          isLoading={isLoading}
-          products={filteredProducts}
-          sortProducts={sortProducts}
-        />
+        <ShopProductSection />
       </ShopLayout>
     </Container>
   );

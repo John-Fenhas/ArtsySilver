@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 
 const sortOptions = [
   { label: "Featured", value: "featured" },
@@ -9,7 +10,7 @@ const sortOptions = [
   { label: "Price, low to high", value: "priceDescending" },
 ];
 
-export default function SortDropDown({ sortProducts }) {
+export default function SortDropDown() {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -25,6 +26,8 @@ export default function SortDropDown({ sortProducts }) {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const { isLoading, updateSortBy } = useFilteredProducts();
 
   return (
     <div ref={ref} className="relative w-max">
@@ -65,11 +68,9 @@ export default function SortDropDown({ sortProducts }) {
             <div
               key={option.value}
               onClick={() => {
-                sortProducts(option.value);
+                updateSortBy(option.value);
                 setOpen(false);
                 setCurrentValue(option.label);
-                console.log(option.value);
-                console.log(selected);
               }}
               className="flex items-center px-4 py-2 cursor-pointer hover:bg-white/5 transition"
             >

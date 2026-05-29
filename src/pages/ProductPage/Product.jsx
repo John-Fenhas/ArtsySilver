@@ -23,7 +23,7 @@ export default function ProductPage() {
 
   return (
     <div className="w-10/12 min-h-fit mx-auto">
-      <BreadCrumb></BreadCrumb>
+      <BreadCrumb isLoading={isLoading} productData={productData} />
       <div className="flex justify-between mx-auto w-11/12">
         <div className="w-1/2 flex justify-center">
           <ProductGallary isLoading={isLoading} productData={productData} />

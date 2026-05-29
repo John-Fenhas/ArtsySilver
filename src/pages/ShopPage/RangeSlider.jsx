@@ -1,13 +1,19 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 
 // ranges are controlled inputs while the number are uncontrolled the number inputs show the min or max value in the placeholder
 // which is controlled by each prespictive state. the number inputs have a keydown listner to change the min and max value not an onchange handler
 
 export default function RangeSlider() {
+  const { isLoading, updatePriceFilter } = useFilteredProducts();
+
   // current min and max value states
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(5000);
+
+  useEffect(() => {
+    updatePriceFilter(minValue, maxValue);
+  }, [minValue, maxValue]);
 
   // max allowed min and max values
   const minLimit = 0;

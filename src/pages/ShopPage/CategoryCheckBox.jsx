@@ -1,90 +1,39 @@
-export default function CategoryCheckBox() {
+import { useState } from "react";
+import { useFilteredProducts } from "../../Context/FilteredProductsContext";
+
+export default function CategoryCheckBox({ categoryName, categoryValue }) {
+  const [isActive, setIsActive] = useState(false);
+
+  const { updateCategoryFilter } = useFilteredProducts();
+
+  function handleClick() {
+    setIsActive((prev) => !prev);
+  }
+
   return (
-    <div>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" className="hidden peer" />
+    <div
+      className="flex items-center cursor-pointer"
+      onClick={() => {
+        updateCategoryFilter(categoryValue);
+        handleClick();
+      }}
+    >
+      <input type="checkbox" className="hidden peer" />
 
+      {isActive ? (
         <div
-          className="w-3 h-3 border
-                  peer-checked:bg-black 
-                  peer-checked:border-black 
+          className="w-3.5 h-3.5 border
+                  bg-black
+                  border-black
                   flex items-center justify-center"
         >
           <span className=" text-white text-xs">✓</span>
         </div>
+      ) : (
+        <div className="w-3.5 h-3.5 border flex items-center justify-center"></div>
+      )}
 
-        <span>Bangels</span>
-      </label>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" className="hidden peer" />
-
-        <div
-          className="w-3 h-3 border
-                  peer-checked:bg-black 
-                  peer-checked:border-black 
-                  flex items-center justify-center"
-        >
-          <span className=" text-white text-xs">✓</span>
-        </div>
-
-        <span>Bracelets</span>
-      </label>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" className="hidden peer" />
-
-        <div
-          className="w-3 h-3 border
-                  peer-checked:bg-black 
-                  peer-checked:border-black 
-                  flex items-center justify-center"
-        >
-          <span className=" text-white text-xs">✓</span>
-        </div>
-
-        <span>Earrings</span>
-      </label>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" className="hidden peer" />
-
-        <div
-          className="w-3 h-3 border
-                  peer-checked:bg-black 
-                  peer-checked:border-black 
-                  flex items-center justify-center"
-        >
-          <span className=" text-white text-xs">✓</span>
-        </div>
-
-        <span>Rings</span>
-      </label>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" className="hidden peer" />
-
-        <div
-          className="w-3 h-3 border
-                  peer-checked:bg-black 
-                  peer-checked:border-black 
-                  flex items-center justify-center"
-        >
-          <span className=" text-white text-xs">✓</span>
-        </div>
-
-        <span>Anklets</span>
-      </label>
-      <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" className="hidden peer" />
-
-        <div
-          className="w-3 h-3 border
-                  peer-checked:bg-black 
-                  peer-checked:border-black 
-                  flex items-center justify-center"
-        >
-          <span className=" text-white text-xs">✓</span>
-        </div>
-
-        <span>Sets</span>
-      </label>
+      <span className="px-2 py-0.5 text-sm">{categoryName}</span>
     </div>
   );
 }
