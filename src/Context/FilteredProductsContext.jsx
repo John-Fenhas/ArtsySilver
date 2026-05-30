@@ -28,6 +28,10 @@ export function FilteredProductsProvider({ children }) {
   //state for sorting by
   const [sortBy, setSortBy] = useState("featured");
 
+  //state for the search feature
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
@@ -113,6 +117,8 @@ export function FilteredProductsProvider({ children }) {
 
     //search query
     if (filters.search.trim()) {
+      console.log("Search");
+
       const query = filters.search.toLowerCase();
       result = result.filter((item) => item.name.toLowerCase().includes(query));
     }
@@ -199,10 +205,34 @@ export function FilteredProductsProvider({ children }) {
     setSortBy(sortBy);
   }
 
+  //toggle modal open dn close
+  function toggleIsSearchOpen(params) {
+    console.log(isSearchOpen);
+
+    setIsSearchOpen((prev) => !prev);
+  }
+
+  //state update for the search temp results
+  function updateSearchQuery(e) {
+    console.log(e);
+
+    setSearchQuery(e.target.value.toLocaleLowerCase());
+  }
+
+  //submit the query to get results in the shop page
+  function submitSearchQuery() {
+    setFilters((prev) => ({
+      ...prev,
+      search: searchQuery.toLocaleLowerCase(),
+    }));
+  }
+
   return (
     <FilteredProductsContext.Provider
       value={{
         filteredProducts,
+        isSearchOpen,
+        searchQuery,
         isLoading,
         updateSortBy,
         toggleInStock,
@@ -211,6 +241,9 @@ export function FilteredProductsProvider({ children }) {
         updateSizeFilter,
         updateCategoryFilter,
         clearFilters,
+        toggleIsSearchOpen,
+        updateSearchQuery,
+        submitSearchQuery,
       }}
     >
       {children}

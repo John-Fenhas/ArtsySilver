@@ -39,9 +39,11 @@ export default function ProductCard({ product, className = "w-full" }) {
             cursor-pointer
             group-hover
             `}
-          onClick={() =>
-            addToCart(product.id, productAlreadyInCart.quantity + 1)
-          }
+          onClick={() => {
+            console.log(productAlreadyInCart);
+
+            addToCart(product.id, productAlreadyInCart?.quantity + 1);
+          }}
         >
           + Add To Cart
         </button>

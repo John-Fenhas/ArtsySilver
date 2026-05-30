@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 import Cart from "../pages/CartPage/Cart";
+import { useFilteredProducts } from "../Context/FilteredProductsContext";
+import SearchModal from "../pages/SearchPage/SearchModal";
 
 function Navbar() {
+  //cart, cart state and function to toggle open and close
   const { cart, isCartOpen, handleCartView } = useCart();
+
+  const { toggleIsSearchOpen } = useFilteredProducts();
 
   let cartItemCount = 0;
   cart.forEach((item) => {
@@ -43,7 +48,7 @@ function Navbar() {
 
         {/* RIGHT ICONS */}
         <div className="flex items-center gap-4">
-          <button>
+          <button onClick={() => toggleIsSearchOpen()}>
             <img
               src="https://rjkfpympkaiwclrnhulw.supabase.co/storage/v1/object/public/general/search.png"
               className="h-5 w-5"
@@ -72,6 +77,7 @@ function Navbar() {
         </div>
       </div>
       {<Cart />}
+      {<SearchModal />}
     </header>
   );
 }
