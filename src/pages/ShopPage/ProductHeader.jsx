@@ -2,9 +2,9 @@ import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 import SortDropDown from "./SortDropDown";
 
 export default function ProductHeader() {
-  const { filteredProducts, isLoading } = useFilteredProducts();
+  const { processedProducts, isLoading } = useFilteredProducts();
 
-  const productNumber = filteredProducts.length;
+  const productNumber = processedProducts.length;
 
   return (
     <div className="flex justify-between items-center pb-1.5">

@@ -26,6 +26,11 @@ export default function SearchModal() {
     submitSearchQuery();
     navigate("/shop");
     toggleIsSearchOpen();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }
 
   //derive the search query result from products

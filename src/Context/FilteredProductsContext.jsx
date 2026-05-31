@@ -33,7 +33,16 @@ export function FilteredProductsProvider({ children }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProducts = useMemo(() => {
+  //state for pagination
+  const [currrentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12;
+
+  //reset shop pages on filter and sort to go back to first page
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters, sortBy]);
+
+  const processedProducts = useMemo(() => {
     let result = [...products];
 
     //checks for in stock and out of stock...   both true or both false should not filter the products
@@ -121,14 +130,23 @@ export function FilteredProductsProvider({ children }) {
 
     //search query
     if (filters.search.trim()) {
-      console.log("Search");
-
       const query = filters.search.toLowerCase();
       result = result.filter((item) => item.name.toLowerCase().includes(query));
     }
 
     return result;
-  }, [products, filters, sortBy]);
+  }, [products, filters, sortBy, currrentPage]);
+
+  //total page count derived from the processedProducts after sorting and filtering
+  const totalPageCount = Math.ceil(processedProducts.length / productsPerPage);
+
+  //final filtered products paginated from processedProducts
+  const filteredProducts = useMemo(() => {
+    let startIndex = (currrentPage - 1) * productsPerPage;
+    let endIndex = startIndex + productsPerPage;
+
+    return processedProducts.slice(startIndex, endIndex);
+  }, [processedProducts]);
 
   //in stock setter fn
   function toggleInStock() {
@@ -270,13 +288,53 @@ export function FilteredProductsProvider({ children }) {
     }));
   }
 
+  //next page button function for pagination
+  function nextPage() {
+    if (currrentPage >= totalPageCount) {
+      setCurrentPage(1);
+      return;
+    }
+    setCurrentPage((prev) => prev + 1);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+  //prev page button function for pagination
+  function prevPage() {
+    if (currrentPage <= 1) {
+      setCurrentPage(totalPageCount);
+      return;
+    }
+    setCurrentPage((prev) => prev - 1);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
+  //go to page function for pagination
+  function goToPage(pageNumber) {
+    setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <FilteredProductsContext.Provider
       value={{
         filters,
         filteredProducts,
+        processedProducts,
         isSearchOpen,
         searchQuery,
+        totalPageCount,
+        currrentPage,
         isLoading,
         updateSortBy,
         toggleInStock,
@@ -291,6 +349,9 @@ export function FilteredProductsProvider({ children }) {
         toggleIsSearchOpen,
         updateSearchQuery,
         submitSearchQuery,
+        nextPage,
+        prevPage,
+        goToPage,
       }}
     >
       {children}

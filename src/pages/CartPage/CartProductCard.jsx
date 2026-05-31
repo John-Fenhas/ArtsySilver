@@ -2,18 +2,24 @@ import { getProducts } from "../../data/products";
 import { useQuery } from "@tanstack/react-query";
 import getPrice from "../../utils/formatPrice";
 import Button from "../../components/ui/Button";
+import { useCart } from "../../Context/CartContext";
+import { Link } from "react-router-dom";
 
-export default function CartProductCard({
-  cartItem,
-  addToCart,
-  decreaseItem,
-  removeFromCart,
-  clearCart,
-}) {
+export default function CartProductCard({ cartItem }) {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
+
+  const {
+    cart,
+    isCartOpen,
+    handleCartView,
+    addToCart,
+    decreaseItem,
+    removeFromCart,
+    clearCart,
+  } = useCart();
 
   if (isLoading) {
     return;
@@ -24,15 +30,39 @@ export default function CartProductCard({
   return (
     <div className="flex gap-4">
       <div>
-        <img
-          src={product.images[0].url}
-          alt={product.name}
-          className="w-24 h-24 object-cover transition-opacity duration-600 group-hover/card:opacity-0 rounded-md"
-        />
+        <Link
+          to={`/product/${product.category}/${product.slug}`}
+          onClick={() => {
+            handleCartView();
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <img
+            src={product.images[0].url}
+            alt={product.name}
+            className="w-24 h-24 object-cover transition-opacity duration-600 group-hover/card:opacity-0 rounded-md"
+          />
+        </Link>
       </div>
       <div className="w-2/3 flex flex-col justify-between items-start">
         <div className="flex w-full justify-between">
-          <span className="text-xs text-wrap max-w-2/3">{product.name}</span>
+          <Link
+            to={`/product/${product.category}/${product.slug}`}
+            onClick={() => {
+              handleCartView();
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <span className="text-xs text-wrap max-w-2/3">{product.name}</span>
+          </Link>
           {product.is_on_sale ? (
             <div className="flex flex-col">
               <span className="text-xs text-red-800">

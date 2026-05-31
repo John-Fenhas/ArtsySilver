@@ -11,7 +11,14 @@ export default function StockAvailability() {
           type="checkbox"
           name="availability"
           className="accent-black w-3.5 h-3.5"
-          onChange={() => toggleInStock()}
+          onChange={() => {
+            toggleInStock();
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
+          }}
         />
         In Stock
       </label>
@@ -20,7 +27,14 @@ export default function StockAvailability() {
           type="checkbox"
           name="availability"
           className="accent-black w-3.5 h-3.5"
-          onChange={() => toggleOutOfStock()}
+          onChange={() => {
+            toggleOutOfStock();
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            });
+          }}
         />
         Out Of Stock
       </label>

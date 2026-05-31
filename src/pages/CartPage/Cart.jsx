@@ -126,14 +126,7 @@ export default function Cart() {
           >
             {cartItemCount ? (
               cart.map((item) => (
-                <CartProductCard
-                  key={item.id}
-                  cartItem={item}
-                  addToCart={addToCart}
-                  decreaseItem={decreaseItem}
-                  removeFromCart={removeFromCart}
-                  clearCart={clearCart}
-                />
+                <CartProductCard key={item.id} cartItem={item} />
               ))
             ) : (
               <div className="flex flex-col justify-center items-center gap-4">

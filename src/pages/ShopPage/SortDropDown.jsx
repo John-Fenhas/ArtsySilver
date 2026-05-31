@@ -71,6 +71,11 @@ export default function SortDropDown() {
                 updateSortBy(option.value);
                 setOpen(false);
                 setCurrentValue(option.label);
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
               }}
               className="flex items-center px-4 py-2 cursor-pointer hover:bg-white/5 transition"
             >

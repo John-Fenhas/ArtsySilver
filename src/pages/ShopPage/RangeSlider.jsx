@@ -27,12 +27,22 @@ export default function RangeSlider() {
     const value = Math.min(Number(e.target.value), maxValue - 1);
     setMinValue(value);
     minRef.current.value = "";
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleMaxChange = (e) => {
     const value = Math.max(Number(e.target.value), minValue + 1);
     setMaxValue(value);
     maxRef.current.value = "";
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

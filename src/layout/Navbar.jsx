@@ -29,16 +29,43 @@ function Navbar() {
 
         {/* NAV LINKS */}
         <nav className="flex gap-6 text-sm font-light">
-          <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
+          <Link
+            to="/shop"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              })
+            }
+          >
             <p>New Arrivals</p>
           </Link>
-          <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
+          <Link
+            to="/shop"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              })
+            }
+          >
             <p>Shop</p>
           </Link>
 
           <p>Gift Guide</p>
 
-          <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
+          <Link
+            to="/shop"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+              })
+            }
+          >
             <p>Trending</p>
           </Link>
           <p>About</p>

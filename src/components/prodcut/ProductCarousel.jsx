@@ -91,7 +91,7 @@ export default function ProductCarousel({ products, isLoading }) {
           }}
         >
           {isLoading
-            ? Array.from({ length: 12 }).map((_, i) => (
+            ? Array.from({ length: 12 }).map((i) => (
                 <SwiperSlide key={i} className="h-auto">
                   <SkeletonProductCard />
                 </SwiperSlide>
