@@ -29,21 +29,19 @@ function Navbar() {
 
         {/* NAV LINKS */}
         <nav className="flex gap-6 text-sm font-light">
-          <Link to="/shop">
+          <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
             <p>New Arrivals</p>
           </Link>
-          <Link to="/shop">
+          <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
             <p>Shop</p>
           </Link>
-          <Link to="/shop">
-            <p>Gift Guide</p>
-          </Link>
-          <Link to="/shop">
+
+          <p>Gift Guide</p>
+
+          <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
             <p>Trending</p>
           </Link>
-          <Link to="/shop">
-            <p>About</p>
-          </Link>
+          <p>About</p>
         </nav>
 
         {/* RIGHT ICONS */}

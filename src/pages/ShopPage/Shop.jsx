@@ -8,6 +8,7 @@ import { getProducts } from "../../data/products";
 import Container from "../../components/ui/Container";
 import { useState } from "react";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
+import PageTransition from "../../components/ui/PageTransition";
 export default function Shop() {
   // const { data: products, isLoading } = useQuery({
   //   queryKey: ["products"],
@@ -79,12 +80,14 @@ export default function Shop() {
   // }
 
   return (
-    <Container className="pt-12 w-10/12">
-      <BreadCrumb />
-      <ShopLayout>
-        <FilterSidebar />
-        <ShopProductSection />
-      </ShopLayout>
-    </Container>
+    <PageTransition>
+      <Container className="pt-12 w-10/12">
+        <BreadCrumb />
+        <ShopLayout>
+          <FilterSidebar />
+          <ShopProductSection />
+        </ShopLayout>
+      </Container>
+    </PageTransition>
   );
 }

@@ -7,6 +7,7 @@ import stones from "../../data/stones";
 import { getProducts } from "../../data/products";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
+import PageTransition from "../../components/ui/PageTransition";
 
 export default function Home() {
   function getRandomProducts(arr, count) {
@@ -23,8 +24,9 @@ export default function Home() {
   const newArrivalsProducts = useMemo(() => {
     return products ? getRandomProducts(products, 12) : [];
   }, [products]);
+
   return (
-    <>
+    <PageTransition>
       <HeroSlider />
       <Container>
         <ProductSection
@@ -53,6 +55,6 @@ export default function Home() {
           classNamePrev={"stones-prev"}
         />
       </Container>
-    </>
+    </PageTransition>
   );
 }

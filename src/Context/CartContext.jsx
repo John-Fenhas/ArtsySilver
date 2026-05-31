@@ -28,7 +28,11 @@ export function CartProvider({ children }) {
     return;
   }
 
-  function handleCartView() {
+  function handleCartView(open) {
+    if (open) {
+      setIsCartOpen(true);
+      return;
+    }
     setIsCartOpen(!isCartOpen);
   }
 

@@ -1,6 +1,7 @@
 import Container from "../../components/ui/Container";
 import ProductCarousel from "./ProductCarousel";
 import Button from "../../components/ui/Button";
+import { Link } from "react-router-dom";
 
 export default function ProductSection({ title, isLoading, products }) {
   return (
@@ -13,7 +14,9 @@ export default function ProductSection({ title, isLoading, products }) {
 
       {/* BUTTON */}
       <div className="flex justify-center mt-12">
-        <Button>View All</Button>
+        <Link to="/shop" onClick={() => window.scrollTo(0, 0)}>
+          <Button>View All</Button>
+        </Link>
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import CartProductCard from "./CartProductCard";
 import Button from "../../components/ui/Button";
 import { useCart } from "../../Context/CartContext";
 import getPrice from "../../utils/formatPrice";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const {
@@ -105,7 +106,6 @@ export default function Cart() {
                   strokeLinejoin="round"
                 ></g>
                 <g id="SVGRepo_iconCarrier">
-                  {" "}
                   <path
                     d="M4 12H20M12 4V20"
                     stroke="#000000"
@@ -117,17 +117,40 @@ export default function Cart() {
               </svg>
             </div>
           </div>
-          <div className="flex flex-col gap-4 px-4 max-h-[80vh] overflow-y-auto">
-            {cart.map((item) => (
-              <CartProductCard
-                key={item.id}
-                cartItem={item}
-                addToCart={addToCart}
-                decreaseItem={decreaseItem}
-                removeFromCart={removeFromCart}
-                clearCart={clearCart}
-              />
-            ))}
+          <div
+            className={
+              cartItemCount
+                ? "flex flex-col gap-4 px-4 max-h-[80vh] overflow-y-auto"
+                : "flex justify-center items-center px-4 w-full min-h-[70vh]"
+            }
+          >
+            {cartItemCount ? (
+              cart.map((item) => (
+                <CartProductCard
+                  key={item.id}
+                  cartItem={item}
+                  addToCart={addToCart}
+                  decreaseItem={decreaseItem}
+                  removeFromCart={removeFromCart}
+                  clearCart={clearCart}
+                />
+              ))
+            ) : (
+              <div className="flex flex-col justify-center items-center gap-4">
+                <span className="text-sm">Your cart is empty</span>
+                <Link
+                  to="/shop"
+                  onClick={() => {
+                    handleCartView();
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  <Button className="">
+                    <span className="text-[1rem] ">START SHOPPING</span>
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 

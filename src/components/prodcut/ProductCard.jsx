@@ -3,7 +3,7 @@ import getPrice from "../../utils/formatPrice";
 import { useCart } from "../../Context/CartContext";
 
 export default function ProductCard({ product, className = "w-full" }) {
-  const { cart, addToCart, removeFromCart, clearCart } = useCart();
+  const { cart, addToCart, handleCartView } = useCart();
 
   const productAlreadyInCart = cart.find((item) => item.id === product.id);
 
@@ -40,9 +40,8 @@ export default function ProductCard({ product, className = "w-full" }) {
             group-hover
             `}
           onClick={() => {
-            console.log(productAlreadyInCart);
-
             addToCart(product.id, productAlreadyInCart?.quantity + 1);
+            handleCartView(true);
           }}
         >
           + Add To Cart

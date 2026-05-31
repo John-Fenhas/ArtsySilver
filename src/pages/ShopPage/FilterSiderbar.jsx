@@ -17,7 +17,7 @@ export default function FilterSidebar() {
     clearFilters,
   } = useFilteredProducts();
   return (
-    <div>
+    <div className="sticky top-12">
       <p className="border-b border-gray-200 py-4 font-medium text-xl">
         Filters
       </p>

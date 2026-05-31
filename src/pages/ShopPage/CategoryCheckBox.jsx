@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 
 export default function CategoryCheckBox({ categoryName, categoryValue }) {
   const [isActive, setIsActive] = useState(false);
 
-  const { updateCategoryFilter } = useFilteredProducts();
+  const { filters, updateCategoryFilter } = useFilteredProducts();
+
+  useEffect(() => {
+    if (filters.category.includes(categoryValue)) {
+      console.log(categoryValue);
+
+      setIsActive(true);
+    }
+  }, []);
 
   function handleClick() {
     setIsActive((prev) => !prev);

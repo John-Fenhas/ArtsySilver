@@ -1,35 +1,5 @@
+import categories from "../../data/categories";
 import CategoryCheckBox from "./CategoryCheckBox";
-
-const categories = [
-  {
-    value: "anklet",
-    name: "Anklets",
-  },
-  {
-    value: "bangle",
-    name: "Bangles",
-  },
-  {
-    value: "bracelet",
-    name: "Bracelets",
-  },
-  {
-    value: "earring",
-    name: "Earrings",
-  },
-  {
-    value: "necklace",
-    name: "Necklaces",
-  },
-  {
-    value: "ring",
-    name: "Rings",
-  },
-  {
-    value: "set",
-    name: "Sets",
-  },
-];
 
 export default function CategoryFilter() {
   return (

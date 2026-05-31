@@ -2,6 +2,8 @@ import { Swiper } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
 import { ChevronLeft, ChevronRight, Divide } from "lucide-react";
+import { useFilteredProducts } from "../../Context/FilteredProductsContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CategoriesStonesCarousel({
   content,
@@ -9,10 +11,14 @@ export default function CategoriesStonesCarousel({
   classNamePrev,
   classNameNext,
 }) {
+  const { categoryFilterHomePage, stonesFilterHomePage, clearFilters } =
+    useFilteredProducts();
+  const navigate = useNavigate();
+
   return (
     <div className="relative">
       <div className="absolute flex flex-col top-5/12 -right-10 z-20">
-        {/* LEFT  */}
+        {/* LEFT BTN */}
         <button className={`cursor-pointer ${classNameNext}`}>
           <div
             className="
@@ -27,7 +33,7 @@ export default function CategoriesStonesCarousel({
           </div>
         </button>
 
-        {/* RIGHT */}
+        {/* RIGHT BTN */}
         <button className={`cursor-pointer ${classNamePrev}`}>
           <div
             className="
@@ -52,7 +58,6 @@ export default function CategoriesStonesCarousel({
           slidesPerView={"auto"}
           spaceBetween={20}
           centeredSlides={false}
-          grabCursor={true}
           breakpoints={{
             0: {
               slidesOffsetBefore: 20,
@@ -100,13 +105,29 @@ export default function CategoriesStonesCarousel({
               <p
                 className={`${
                   title === "Categories"
-                    ? "absolute left-1/2 -translate-x-1/2 top-1/2 text-gray-300 text-2xl font-semibold"
-                    : "absolute left-1/2 -translate-x-1/2 -bottom-2.5 text-gray-900 text-2xl font-semibold text-nowrap"
+                    ? "absolute left-1/2 -translate-x-1/2 top-1/2 text-gray-300 text-2xl font-semibold cursor-pointer"
+                    : "absolute left-1/2 -translate-x-1/2 -bottom-2.5 text-gray-900 text-2xl font-semibold text-nowrap cursor-pointer"
                 }`}
               >
                 {item.name}
               </p>
-              <img src={`${item.url}`} />
+              <Link to="/shop">
+                <img
+                  className="cursor-pointer"
+                  src={`${item.url}`}
+                  onClick={() => {
+                    if (title === "Categories") {
+                      clearFilters();
+                      categoryFilterHomePage(item.value);
+                      window.scrollTo(0, 0);
+                    } else {
+                      clearFilters();
+                      stonesFilterHomePage(item.value);
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

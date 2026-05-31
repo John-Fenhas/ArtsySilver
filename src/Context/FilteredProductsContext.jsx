@@ -19,6 +19,7 @@ export function FilteredProductsProvider({ children }) {
       outOfStock: true,
     },
     category: [],
+    stones: [],
     size: [],
     minPrice: 0,
     maxPrice: 5000,
@@ -45,11 +46,14 @@ export function FilteredProductsProvider({ children }) {
 
     // checks if the item's category exists in the filter category
     if (filters.category.length > 0) {
-      console.log(filters.category);
-      console.log(result.map((p) => p.category));
       result = result.filter((item) =>
         filters.category.includes(item.category),
       );
+    }
+
+    //checks if the item's matrial exists in the filter stones
+    if (filters.stones.length > 0) {
+      result = result.filter((item) => filters.stones.includes(item.material));
     }
 
     // checks if the item is available in the size filter applied
@@ -126,6 +130,7 @@ export function FilteredProductsProvider({ children }) {
     return result;
   }, [products, filters, sortBy]);
 
+  //in stock setter fn
   function toggleInStock() {
     setFilters((prev) => ({
       ...prev,
@@ -136,6 +141,7 @@ export function FilteredProductsProvider({ children }) {
     }));
   }
 
+  //out of stock setter fn
   function toggleOutOfStock() {
     setFilters((prev) => ({
       ...prev,
@@ -146,6 +152,7 @@ export function FilteredProductsProvider({ children }) {
     }));
   }
 
+  //price setter fn
   function updatePriceFilter(min, max) {
     setFilters((prev) => ({
       ...prev,
@@ -153,7 +160,7 @@ export function FilteredProductsProvider({ children }) {
       maxPrice: max,
     }));
   }
-
+  //size setter fn
   function updateSizeFilter(sizeToFilterBy) {
     if (filters.size.includes(sizeToFilterBy)) {
       setFilters((prev) => ({
@@ -168,6 +175,7 @@ export function FilteredProductsProvider({ children }) {
     }));
   }
 
+  //category setter fn
   function updateCategoryFilter(categoryToFilterBy) {
     if (filters.category.includes(categoryToFilterBy)) {
       setFilters((prev) => ({
@@ -187,6 +195,39 @@ export function FilteredProductsProvider({ children }) {
     }));
   }
 
+  //category setter fn for the home page section. it resets the categories choosen and the category chossen on the home page is the only active one
+  function categoryFilterHomePage(categoryChoosen) {
+    setFilters((prev) => ({
+      ...prev,
+      category: [categoryChoosen],
+    }));
+  }
+
+  //stones setter fn
+  function updateStonesFilter(stoneToFilterBy) {
+    if (filters.stones.includes(stoneToFilterBy)) {
+      setFilters((prev) => ({
+        ...prev,
+        stones: [...prev.stones.filter((stone) => stone !== stoneToFilterBy)],
+      }));
+      return;
+    }
+
+    setFilters((prev) => ({
+      ...prev,
+      stones: [...prev.stones, stoneToFilterBy],
+    }));
+  }
+
+  //stones setter fn for the home page section. it resets the stones choosen and the stone chossen on the home page is the only active one
+  function stonesFilterHomePage(stoneChoosen) {
+    setFilters((prev) => ({
+      ...prev,
+      stones: [stoneChoosen],
+    }));
+  }
+
+  // setter fn to clear filters to defults
   function clearFilters() {
     setFilters({
       availability: {
@@ -194,6 +235,7 @@ export function FilteredProductsProvider({ children }) {
         outOfStock: true,
       },
       category: [],
+      stones: [],
       size: [],
       minPrice: 0,
       maxPrice: 5000,
@@ -201,6 +243,7 @@ export function FilteredProductsProvider({ children }) {
     });
   }
 
+  //sort by setter fn
   function updateSortBy(sortBy) {
     setSortBy(sortBy);
   }
@@ -230,6 +273,7 @@ export function FilteredProductsProvider({ children }) {
   return (
     <FilteredProductsContext.Provider
       value={{
+        filters,
         filteredProducts,
         isSearchOpen,
         searchQuery,
@@ -240,6 +284,9 @@ export function FilteredProductsProvider({ children }) {
         updatePriceFilter,
         updateSizeFilter,
         updateCategoryFilter,
+        categoryFilterHomePage,
+        updateStonesFilter,
+        stonesFilterHomePage,
         clearFilters,
         toggleIsSearchOpen,
         updateSearchQuery,
