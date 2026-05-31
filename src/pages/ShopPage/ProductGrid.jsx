@@ -1,7 +1,7 @@
 import ProductCard from "../../components/prodcut/ProductCard";
 import SkeletonProductCard from "../../components/prodcut/skeletonProductCard";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
-import Pagination from "./pagination";
+import Pagination from "./Pagination";
 
 export default function ProductGrid() {
   const { filteredProducts, isLoading } = useFilteredProducts();
