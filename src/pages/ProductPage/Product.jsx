@@ -24,13 +24,13 @@ export default function ProductPage() {
 
   return (
     <PageTransition>
-      <div className="w-10/12 min-h-fit mx-auto">
+      <div className="w-full px-3 lg:w-10/12 min-h-fit mx-auto">
         <BreadCrumb isLoading={isLoading} productData={productData} />
-        <div className="flex justify-between mx-auto w-11/12">
-          <div className="w-1/2 flex justify-center">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:mx-auto w-11/12">
+          <div className="w-full lg:w-1/2 flex justify-center pb-4 lg:pb-1">
             <ProductGallary isLoading={isLoading} productData={productData} />
           </div>
-          <div className="w-2xl h-full ">
+          <div className="w-full md:w-2xl h-full ">
             <ProductInfo isLoading={isLoading} productData={productData} />
           </div>
         </div>

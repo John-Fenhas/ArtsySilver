@@ -6,7 +6,7 @@ export default function BreadCrumb({ isLoading, productData }) {
   }
 
   return (
-    <div className="text-xs py-3">
+    <div className="text-[0.68rem] sm:text-xs py-3">
       <Link to="/">
         <span className="font-semibold pr-1">Home</span>
       </Link>

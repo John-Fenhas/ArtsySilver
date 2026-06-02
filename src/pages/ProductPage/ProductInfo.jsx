@@ -34,21 +34,21 @@ export default function ProductInfo({ productData, isLoading }) {
 
   return (
     <div className="w-max min-w-11/12 max-w-full">
-      <div className="border-b border-gray-300 pb-6 mb-12">
-        <span className="text-3xl font-normal block pb-6">
+      <div className="border-b border-gray-300 pb-2 mb-2 lg:pb-6 lg:mb-12">
+        <span className="lg:text-3xl text-2xl font-normal block pb-6">
           {productData.name}
         </span>
         {productData.is_on_sale ? (
           <>
-            <span className="text-red-500 text-xl">
+            <span className="text-red-500 text-lg lg:text-xl">
               {getPrice(productData.old_price_in_cents)}
             </span>
-            <span className="text-sm line-through decoration-1 px-3">
+            <span className="lg:text-sm text-xs line-through decoration-1 px-3">
               {getPrice(productData.price_in_cents)}
             </span>
           </>
         ) : (
-          <span className="text-xl font-normal">
+          <span className="text-lg lg:text-xl font-normal">
             {getPrice(productData.price_in_cents)}
           </span>
         )}
@@ -74,29 +74,44 @@ export default function ProductInfo({ productData, isLoading }) {
             ></path>{" "}
           </g>
         </svg>
-        <span className="text-sm font-medium">
+        <span className="lg:text-sm text-xs font-medium">
           {productData.rating_stars} ( {productData.rating_count} review )
         </span>
       </div>
-      <div className="py-10">
+      <div className="lg:py-10 py-6">
         <div className="flex items-center gap-3 py-1.5 space">
-          <img src="https://img.icons8.com/ios-filled/24/000000/delivery.png" />
-          <span className="font-semibold">Same Day Delivery</span>
+          <img
+            className="w-5 h-5 lg:w-6 lg:h-6"
+            src="https://img.icons8.com/ios-filled/24/000000/delivery.png"
+          />
+          <span className="lg:text-base text-sm font-semibold">
+            Same Day Delivery
+          </span>
         </div>
         <div className="flex items-center gap-3 py-1.5">
-          <img src="https://img.icons8.com/ios-filled/24/000000/security-checked.png" />
-          <span className="font-semibold">3-Month Warranty</span>
+          <img
+            className="w-5 h-5 lg:w-6 lg:h-6"
+            src="https://img.icons8.com/ios-filled/24/000000/security-checked.png"
+          />
+          <span className="lg:text-base text-sm font-semibold">
+            3-Month Warranty
+          </span>
         </div>
         <div className="flex items-center gap-3 py-1.5">
-          <img src="https://img.icons8.com/ios-filled/24/000000/return.png" />
-          <span className="font-semibold">14-Days Easy Exchange & Refund</span>
+          <img
+            className="w-5 h-5 lg:w-6 lg:h-6"
+            src="https://img.icons8.com/ios-filled/24/000000/return.png"
+          />
+          <span className="lg:text-base text-sm font-semibold">
+            14-Days Easy Exchange & Refund
+          </span>
         </div>
       </div>
-      <div className="pb-12">
+      <div className="lg:pb-12 pb-6">
         <span className="block text-xs font-medium">Quantity:</span>
         <div className="flex items-center py-2">
           <div
-            className="flex justify-center items-center h-12 w-12 text-4xl rounded-s-2xl border border-gray-300 border-r-0 cursor-pointer"
+            className="flex justify-center items-center w-10 h-10 lg:h-12 lg:w-12 text-4xl rounded-s-2xl border border-gray-300 border-r-0 cursor-pointer"
             onClick={
               productAlreadyInCart
                 ? () => {
@@ -131,11 +146,11 @@ export default function ProductInfo({ productData, isLoading }) {
               </g>
             </svg>
           </div>
-          <span className="flex justify-center items-center text-sm h-12 px-4 border-y border-gray-300">
+          <span className="flex justify-center items-center text-xs lg:text-sm w-10 h-10 lg:h-12 lg:w-12 px-4 border-y border-gray-300">
             {productAlreadyInCart ? productAlreadyInCart.quantity : quantity}
           </span>
           <div
-            className="flex justify-center items-center h-12 w-12 text-2xl rounded-e-2xl border border-gray-300 border-l-0 cursor-pointer"
+            className="flex justify-center items-center w-10 h-10 lg:h-12 lg:w-12 text-2xl rounded-e-2xl border border-gray-300 border-l-0 cursor-pointer"
             onClick={
               productAlreadyInCart
                 ? () => {

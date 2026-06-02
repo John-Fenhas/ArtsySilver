@@ -17,7 +17,7 @@ export default function ProductGallery({ productData, isLoading }) {
   const images = productData.images;
 
   return (
-    <div className="max-w-5/6 mx-auto">
+    <div className="w-full lg:max-w-5/6 mx-auto">
       {/* MAIN IMAGE */}
       <Swiper
         spaceBetween={10}

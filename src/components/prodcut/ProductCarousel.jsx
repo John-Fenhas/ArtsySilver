@@ -70,21 +70,26 @@ export default function ProductCarousel({ products, isLoading }) {
           grabCursor={true}
           breakpoints={{
             0: {
-              slidesPerView: 1.5,
+              slidesPerView: 1.1,
               slidesOffsetBefore: 20,
               slidesOffsetAfter: 20,
             },
             640: {
-              slidesPerView: 2,
+              slidesPerView: 2.2,
               slidesOffsetBefore: 22,
               slidesOffsetAfter: 22,
             },
             768: {
-              slidesPerView: 2,
+              slidesPerView: 2.2,
               slidesOffsetBefore: 24,
               slidesOffsetAfter: 24,
             },
             1024: {
+              slidesPerView: 3,
+              slidesOffsetBefore: 26,
+              slidesOffsetAfter: 26,
+            },
+            1280: {
               slidesPerView: 4,
               slidesPerGroup: 4,
             },

@@ -13,6 +13,7 @@ import MobileShopLayout from "../../layout/MobileShopLayout";
 import MobileFilterSidebar from "./MobileFilterSidebar";
 import ProductGrid from "./ProductGrid";
 import MobileSortDropDown from "./MobileSortDropDown";
+import useIsMobile from "../../hooks/isMobile";
 export default function Shop() {
   // const { data: products, isLoading } = useQuery({
   //   queryKey: ["products"],
@@ -83,18 +84,31 @@ export default function Shop() {
   //   }
   // }
 
+  const IsMobile = useIsMobile();
+  console.log(IsMobile);
+
   return (
     <PageTransition>
-      <Container className="">
+      {IsMobile ? (
         <MobileShopLayout>
           <BreadCrumb />
           <>
             <MobileFilterSidebar />
             <MobileSortDropDown />
           </>
-          <ProductGrid />
+          <>
+            <ProductGrid />
+          </>
         </MobileShopLayout>
-      </Container>
+      ) : (
+        <Container className="pt-12 w-11/12">
+          <BreadCrumb />
+          <ShopLayout>
+            <FilterSidebar />
+            <ShopProductSection />
+          </ShopLayout>
+        </Container>
+      )}
     </PageTransition>
   );
 }

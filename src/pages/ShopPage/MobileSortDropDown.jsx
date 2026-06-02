@@ -52,9 +52,28 @@ export default function MobileSortDropDown() {
       <button
         type="button"
         onClick={toggleSort}
-        className="w-1/2 flex items-center justify-center border border-gray-300 px-4 py-2 font-medium"
+        className="w-1/2 flex items-center justify-center border border-t-0 border-l-0 border-gray-300 px-4 py-2 font-medium"
       >
         <span className=" pr-2">Sort By</span>
+        <span
+          className={`transition-transform duration-400 
+          `}
+        >
+          <svg
+            focusable="false"
+            width="12"
+            height="12"
+            className="icon icon--chevron icon--inline  "
+            viewBox="0 0 12 8"
+          >
+            <path
+              fill="none"
+              d="M1 1l5 5 5-5"
+              stroke="currentColor"
+              strokeWidth="1.6"
+            ></path>
+          </svg>
+        </span>
       </button>
 
       {/* DRAWER */}
