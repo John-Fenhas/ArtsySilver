@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 import PageTransition from "../../components/ui/PageTransition";
 import MobileShopLayout from "../../layout/MobileShopLayout";
-import MobileFilterSidebar from "./MobileFilterSidebar";
+import MobileFilterSidebar from "./MobileFiltersidebar";
 import ProductGrid from "./ProductGrid";
 import MobileSortDropDown from "./MobileSortDropDown";
 import useIsMobile from "../../hooks/isMobile";
