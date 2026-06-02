@@ -138,14 +138,28 @@ export default function MobileNavbar() {
             <nav className="px-6">
               <Link
                 to="/"
-                onClick={toggleIsMenuOpen}
+                onClick={() => {
+                  toggleIsMenuOpen;
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                  });
+                }}
                 className="block py-5 border-b border-gray-200"
               >
                 Home
               </Link>
               <Link
                 to="/shop"
-                onClick={toggleIsMenuOpen}
+                onClick={() => {
+                  toggleIsMenuOpen;
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                  });
+                }}
                 className="block py-5 border-b border-gray-200"
               >
                 New Arrivals
@@ -153,7 +167,14 @@ export default function MobileNavbar() {
 
               <Link
                 to="/shop"
-                onClick={toggleIsMenuOpen}
+                onClick={() => {
+                  toggleIsMenuOpen;
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                  });
+                }}
                 className="block py-5 border-b border-gray-200"
               >
                 Shop
@@ -163,7 +184,14 @@ export default function MobileNavbar() {
 
               <Link
                 to="/shop"
-                onClick={toggleIsMenuOpen}
+                onClick={() => {
+                  toggleIsMenuOpen;
+                  window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                  });
+                }}
                 className="block py-5 border-b border-gray-200"
               >
                 Trending
