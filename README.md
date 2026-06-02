@@ -26,8 +26,8 @@
 <h2>
 
 Live Demo: [View Live Site](https://artsy-silver.vercel.app/)
+
 </h2> 
-  
 
 
 ---
@@ -42,45 +42,44 @@ The application allows users to browse products, search instantly, combine multi
 
 ---
 
-
 ## Features
 
 ### Product Catalog
 
-* Dynamic product data fetched from Supabase
-* Relational product and image structure
-* Dynamic product routes using category and slug
-* Product image galleries
-* Product availability and sale indicators
+- Dynamic product data fetched from Supabase
+- Relational product and image structure
+- Dynamic product routes using category and slug
+- Product image galleries
+- Product availability and sale indicators
 
 ### Search & Discovery
 
-* Instant search preview
-* Shop-wide search functionality
-* Category filtering
-* Stone filtering
-* Size filtering
-* Price range filtering
-* Multiple sorting options
-* Combined search, filtering, sorting, and pagination
+- Instant search preview
+- Shop-wide search functionality
+- Category filtering
+- Stone filtering
+- Size filtering
+- Price range filtering
+- Multiple sorting options
+- Combined search, filtering, sorting, and pagination
 
 ### Shopping Experience
 
-* Persistent cart using localStorage
-* Add products to cart
-* Remove products from cart
-* Increase and decrease product quantities
-* Global cart state available throughout the application
-* Slide-out cart drawer
+- Persistent cart using localStorage
+- Add products to cart
+- Remove products from cart
+- Increase and decrease product quantities
+- Global cart state available throughout the application
+- Slide-out cart drawer
 
 ### User Experience
 
-* Responsive design
-* Skeleton loading states
-* Smooth pagination navigation
-* Optimized WebP images
-* Hero image preloading
-* Product search drawer
+- Responsive design
+- Skeleton loading states
+- Smooth pagination navigation
+- Optimized WebP images
+- Hero image preloading
+- Product search drawer
 
 ---
 
@@ -88,23 +87,23 @@ The application allows users to browse products, search instantly, combine multi
 
 ### Frontend
 
-* React 19
-* React Router
-* Tailwind CSS
-* Framer Motion
-* Swiper
-* Lucide React
+- React 19
+- React Router
+- Tailwind CSS
+- Framer Motion
+- Swiper
+- Lucide React
 
 ### State Management
 
-* React Context API
-* useReducer
-* useMemo
+- React Context API
+- useReducer
+- useMemo
 
 ### Backend & Data
 
-* Supabase
-* TanStack Query
+- Supabase
+- TanStack Query
 
 ---
 
@@ -118,10 +117,10 @@ Product data is stored in Supabase and fetched through TanStack Query.
 
 TanStack Query handles:
 
-* Data fetching
-* Caching
-* Loading states
-* Query synchronization
+- Data fetching
+- Caching
+- Loading states
+- Query synchronization
 
 ### Client State
 
@@ -131,27 +130,27 @@ The application uses two dedicated contexts:
 
 Responsible for:
 
-* Cart visibility
-* Cart state
-* Quantity management
-* Persistent localStorage synchronization
+- Cart visibility
+- Cart state
+- Quantity management
+- Persistent localStorage synchronization
 
 Cart updates are managed through a reducer-driven architecture using actions such as:
 
-* ADD_ITEM
-* REMOVE_ITEM
-* DECREASE_ITEM
-* CLEAR_CART
+- ADD_ITEM
+- REMOVE_ITEM
+- DECREASE_ITEM
+- CLEAR_CART
 
 #### Product Context
 
 Responsible for:
 
-* Search
-* Filtering
-* Sorting
-* Pagination
-* Product discovery state
+- Search
+- Filtering
+- Sorting
+- Pagination
+- Product discovery state
 
 All catalog interactions operate from a centralized source of truth, ensuring predictable behavior across the application.
 
@@ -168,13 +167,13 @@ products
 
 Products contain information such as:
 
-* Name
-* Slug
-* Category
-* Material
-* Price
-* Availability
-* Ratings
+- Name
+- Slug
+- Category
+- Material
+- Price
+- Availability
+- Ratings
 
 Images are stored separately and linked to products through their product identifier.
 
@@ -216,14 +215,14 @@ This required careful state management to ensure that changing filters, search t
 
 Working on Artsy Silver helped me strengthen my understanding of:
 
-* Backend integration with Supabase
-* Server-state management with TanStack Query
-* Context-based application architecture
-* Reducer-driven state management
-* Derived state using useMemo
-* Managing complex UI state
-* Building scalable filtering and search systems
-* Creating responsive e-commerce interfaces
+- Backend integration with Supabase
+- Server-state management with TanStack Query
+- Context-based application architecture
+- Reducer-driven state management
+- Derived state using useMemo
+- Managing complex UI state
+- Building scalable filtering and search systems
+- Creating responsive e-commerce interfaces
 
 ---
 
@@ -231,15 +230,15 @@ Working on Artsy Silver helped me strengthen my understanding of:
 
 Planned improvements include:
 
-* User authentication
-* Wishlist functionality
-* Checkout flow
-* Order management
-* User accounts
-* Inventory tracking
-* Admin dashboard
-* Product management tools
-* Full e-commerce workflow
+- User authentication
+- Wishlist functionality
+- Checkout flow
+- Order management
+- User accounts
+- Inventory tracking
+- Admin dashboard
+- Product management tools
+- Full e-commerce workflow
 
 The long-term goal is to evolve Artsy Silver from a storefront experience into a complete e-commerce platform.
 
