@@ -8,7 +8,7 @@ export default function ProductGrid() {
 
   return (
     <div className="flex flex-col items-center gap-16">
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
         {isLoading
           ? Array.from({ length: 12 }).map((_, i) => (
               <SkeletonProductCard key={i} />

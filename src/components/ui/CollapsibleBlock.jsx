@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-export default function FilterBlock({
+export default function CollapsibleBlock({
   title,
   children,
   className,

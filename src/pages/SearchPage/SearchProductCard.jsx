@@ -14,21 +14,25 @@ export default function SearchProductCard({ product }) {
         </Link>
       </div>
       <div className="w-2/3 flex items-start">
-        <div className="flex w-full justify-between">
+        <div className="flex flex-col sm:flex-row sm:w-full sm:justify-between">
           <Link to={`/product/${product.category}/${product.slug}`}>
-            <span className="text-xs text-wrap max-w-2/3">{product.name}</span>
+            <span className="text-[0.68rem] sm:text-xs text-wrap max-w-2/3">
+              {product.name}
+            </span>
           </Link>
           {product.is_on_sale ? (
-            <div className="flex flex-col">
-              <span className="text-xs text-red-800">
+            <div className="flex flex-col pt-1">
+              <span className="text-[0.65rem] sm:text-xs  text-red-800">
                 {getPrice(product.price_in_cents)}
               </span>
-              <span className="text-xs line-through">
+              <span className="text-[0.65rem] sm:text-xs  line-through">
                 {getPrice(product.old_price_in_cents)}
               </span>
             </div>
           ) : (
-            <span className="text-xs">{getPrice(product.price_in_cents)}</span>
+            <span className="text-[0.68rem] sm:text-xs pt-1">
+              {getPrice(product.price_in_cents)}
+            </span>
           )}
         </div>
       </div>

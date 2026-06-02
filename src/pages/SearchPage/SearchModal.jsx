@@ -87,7 +87,7 @@ export default function SearchModal() {
         onClick={() => toggleIsSearchOpen()}
       />
       <div
-        className={`absolute top-0 right-0 h-full w-124 bg-white transition-transform duration-500 flex flex-col justify-between ${
+        className={`absolute top-0 right-0 h-full w-[80vw] sm:w-[40vw] md:w-[60vw] lg:w-[40vw] xl:w-[30vw] bg-white transition-transform duration-500 flex flex-col justify-between ${
           isSearchOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

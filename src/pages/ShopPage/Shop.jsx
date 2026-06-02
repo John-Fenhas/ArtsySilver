@@ -9,6 +9,10 @@ import Container from "../../components/ui/Container";
 import { useState } from "react";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 import PageTransition from "../../components/ui/PageTransition";
+import MobileShopLayout from "../../layout/MobileShopLayout";
+import MobileFilterSidebar from "./MobileFilterSidebar";
+import ProductGrid from "./ProductGrid";
+import MobileSortDropDown from "./MobileSortDropDown";
 export default function Shop() {
   // const { data: products, isLoading } = useQuery({
   //   queryKey: ["products"],
@@ -81,12 +85,15 @@ export default function Shop() {
 
   return (
     <PageTransition>
-      <Container className="pt-12 w-10/12">
-        <BreadCrumb />
-        <ShopLayout>
-          <FilterSidebar />
-          <ShopProductSection />
-        </ShopLayout>
+      <Container className="">
+        <MobileShopLayout>
+          <BreadCrumb />
+          <>
+            <MobileFilterSidebar />
+            <MobileSortDropDown />
+          </>
+          <ProductGrid />
+        </MobileShopLayout>
       </Container>
     </PageTransition>
   );

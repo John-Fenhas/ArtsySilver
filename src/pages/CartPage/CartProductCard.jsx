@@ -49,7 +49,7 @@ export default function CartProductCard({ cartItem }) {
         </Link>
       </div>
       <div className="w-2/3 flex flex-col justify-between items-start">
-        <div className="flex w-full justify-between">
+        <div className="flex flex-col sm:flex-row sm:w-full sm:justify-between">
           <Link
             to={`/product/${product.category}/${product.slug}`}
             onClick={() => {
@@ -61,31 +61,35 @@ export default function CartProductCard({ cartItem }) {
               });
             }}
           >
-            <span className="text-xs text-wrap max-w-2/3">{product.name}</span>
+            <span className="text-[0.68rem] sm:text-xs text-wrap sm:max-w-2/3">
+              {product.name}
+            </span>
           </Link>
           {product.is_on_sale ? (
-            <div className="flex flex-col">
-              <span className="text-xs text-red-800">
+            <div className="flex flex-col pt-1">
+              <span className="text-[0.68rem] sm:text-xs text-red-800">
                 {getPrice(product.price_in_cents)}
               </span>
-              <span className="text-xs line-through">
+              <span className="text-[0.68rem] sm:text-xs line-through">
                 {getPrice(product.old_price_in_cents)}
               </span>
             </div>
           ) : (
-            <span className="text-xs">{getPrice(product.price_in_cents)}</span>
+            <span className="text-[0.68rem] sm:text-xs pt-1">
+              {getPrice(product.price_in_cents)}
+            </span>
           )}
         </div>
 
-        <div className="flex items-end gap-4">
+        <div className="flex-col sm:flex items-end gap-4">
           <div className="flex items-center pt-3">
             <div
-              className="flex justify-center items-center h-8 w-8 text-4xl rounded-s-2xl border border-gray-300 border-r-0"
+              className="flex justify-center items-center h-6 w-6 sm:h-8 sm:w-8  text-4xl rounded-s-2xl border border-gray-300 border-r-0"
               onClick={() => decreaseItem(product.id)}
             >
               <svg
-                width="12px"
-                height="12px"
+                width="0.8rem"
+                height="0.8rem"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,16 +111,16 @@ export default function CartProductCard({ cartItem }) {
                 </g>
               </svg>
             </div>
-            <span className="flex justify-center items-center text-xs h-8 px-4 border-y border-gray-300">
+            <span className="flex justify-center items-center text-xs h-6 w-6 sm:h-8 sm:w-8 border-y border-gray-300">
               {cartItem.quantity}
             </span>
             <div
-              className="flex justify-center items-center h-8 w-8 text-2xl rounded-e-2xl border border-gray-300 border-l-0"
+              className="flex justify-center items-center h-6 w-6 sm:h-8 sm:w-8 text-2xl rounded-e-2xl border border-gray-300 border-l-0"
               onClick={() => addToCart(product.id)}
             >
               <svg
-                width="12px"
-                height="12px"
+                width="0.8rem"
+                height="0.8rem"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

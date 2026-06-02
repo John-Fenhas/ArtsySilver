@@ -61,7 +61,7 @@ export default function Cart() {
         onClick={() => handleCartView()}
       />
       <div
-        className={`absolute top-0 right-0 h-full w-124 bg-white transition-transform duration-500 flex flex-col justify-between ${
+        className={`absolute top-0 right-0 h-full w-[80vw] sm:w-[40vw] md:w-[60vw] lg:w-[40vw] xl:w-[30vw] bg-white transition-transform duration-500 flex flex-col justify-between ${
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -148,11 +148,14 @@ export default function Cart() {
         </div>
 
         <div className="px-4 py-3">
-          <div className="flex justify-between items-center pb-2.5">
-            <span className="text-xs underline text-gray-500">
+          <div
+            className="sm:flex sm:justify-between sm:items-center 
+          pb-2.5 flex flex-col gap-2"
+          >
+            <span className="text-[0.68rem] underline text-gray-500">
               Add order note
             </span>
-            <span className="text-xs text-gray-500">
+            <span className="text-[0.68rem] text-gray-500">
               Shipping calculated at checkout
             </span>
           </div>

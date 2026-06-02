@@ -4,7 +4,7 @@ import Cart from "../pages/CartPage/Cart";
 import { useFilteredProducts } from "../Context/FilteredProductsContext";
 import SearchModal from "../pages/SearchPage/SearchModal";
 
-function Navbar() {
+export default function Navbar() {
   //cart, cart state and function to toggle open and close
   const { cart, isCartOpen, handleCartView } = useCart();
 
@@ -106,5 +106,3 @@ function Navbar() {
     </header>
   );
 }
-
-export default Navbar;

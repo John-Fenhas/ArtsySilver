@@ -1,10 +1,8 @@
-import Container from "../components/ui/Container";
-
 function Footer() {
   return (
     <footer className="bg-white pt-20 pb-10">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-80">
-        <div className="mx-auto">
+      <div className="flex justify-between px-12">
+        <div className="w-max">
           <p className="text-sm font-semibold mb-2">HELP</p>
 
           <ul className="space-y-2 text-xs text-gray-600">
@@ -32,7 +30,7 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="mx-auto">
+        <div className="w-max">
           <p className="text-sm font-semibold mb-4">POLICIES</p>
 
           <ul className="space-y-2 text-sm text-gray-600">
@@ -48,7 +46,7 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="mx-auto">
+        <div className="w-max">
           <p className="text-sm font-semibold mb-4">FOLLOW US</p>
 
           <div className="flex">
