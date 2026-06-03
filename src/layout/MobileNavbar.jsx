@@ -48,6 +48,7 @@ export default function MobileNavbar() {
     <>
       <header className="flex justify-center items-center h-12 border-b border-gray-300 fixed top-0 right-0 left-0 bg-white z-50">
         <div className="flex items-center justify-between w-11/12 ">
+          {/*MENU*/}
           <button onClick={toggleIsMenuOpen}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +75,7 @@ export default function MobileNavbar() {
             />
           </Link>
 
-          {/* CART */}
+          {/* CART & SEARCH */}
 
           <div className="flex gap-4 relative cursor-pointer">
             <button onClick={() => toggleIsSearchOpen()}>
@@ -114,7 +115,7 @@ export default function MobileNavbar() {
           }`}
         >
           <div>
-            <div className="px-6 py-5">
+            <div className=" flex justify-end px-6 py-5">
               <button onClick={toggleIsMenuOpen}>
                 <svg
                   width="24px"
@@ -139,7 +140,7 @@ export default function MobileNavbar() {
               <Link
                 to="/"
                 onClick={() => {
-                  toggleIsMenuOpen;
+                  toggleIsMenuOpen();
                   window.scrollTo({
                     top: 0,
                     left: 0,
@@ -148,12 +149,12 @@ export default function MobileNavbar() {
                 }}
                 className="block py-5 border-b border-gray-200"
               >
-                Home
+                <span>Home</span>
               </Link>
               <Link
                 to="/shop"
                 onClick={() => {
-                  toggleIsMenuOpen;
+                  toggleIsMenuOpen();
                   window.scrollTo({
                     top: 0,
                     left: 0,
@@ -168,7 +169,7 @@ export default function MobileNavbar() {
               <Link
                 to="/shop"
                 onClick={() => {
-                  toggleIsMenuOpen;
+                  toggleIsMenuOpen();
                   window.scrollTo({
                     top: 0,
                     left: 0,
@@ -185,7 +186,7 @@ export default function MobileNavbar() {
               <Link
                 to="/shop"
                 onClick={() => {
-                  toggleIsMenuOpen;
+                  toggleIsMenuOpen();
                   window.scrollTo({
                     top: 0,
                     left: 0,
