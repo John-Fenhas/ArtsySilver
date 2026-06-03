@@ -85,7 +85,6 @@ export default function Shop() {
   // }
 
   const IsMobile = useIsMobile();
-  console.log(IsMobile);
 
   return (
     <PageTransition>
@@ -101,7 +100,7 @@ export default function Shop() {
           </>
         </MobileShopLayout>
       ) : (
-        <Container className="pt-12 w-11/12">
+        <Container className="pt-4 w-11/12">
           <BreadCrumb />
           <ShopLayout>
             <FilterSidebar />

@@ -119,12 +119,12 @@ export function FilteredProductsProvider({ children }) {
     }
 
     //sorting price Assending
-    if (sortBy === "priceAssending") {
+    if (sortBy === "priceDescending") {
       result = result.sort((a, b) => b.price_in_cents - a.price_in_cents);
     }
 
     //sorting price Descending
-    if (sortBy === "priceDescending") {
+    if (sortBy === "priceAssending") {
       result = result.sort((a, b) => a.price_in_cents - b.price_in_cents);
     }
 
@@ -178,6 +178,7 @@ export function FilteredProductsProvider({ children }) {
       maxPrice: max,
     }));
   }
+
   //size setter fn
   function updateSizeFilter(sizeToFilterBy) {
     if (filters.size.includes(sizeToFilterBy)) {

@@ -5,15 +5,21 @@ import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 // which is controlled by each prespictive state. the number inputs have a keydown listner to change the min and max value not an onchange handler
 
 export default function RangeSlider() {
-  const { isLoading, updatePriceFilter } = useFilteredProducts();
+  const { filters, isLoading, updatePriceFilter } = useFilteredProducts();
 
   // current min and max value states
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(5000);
+  const [minValue, setMinValue] = useState(filters.minPrice);
+  const [maxValue, setMaxValue] = useState(filters.maxPrice);
 
   useEffect(() => {
-    updatePriceFilter(minValue, maxValue);
+    const t = setTimeout(() => updatePriceFilter(minValue, maxValue), 300);
+    return () => clearTimeout(t);
   }, [minValue, maxValue]);
+
+  useEffect(() => {
+    setMaxValue(filters.maxPrice);
+    setMinValue(filters.minPrice);
+  }, [filters.minPrice, filters.maxPrice]);
 
   // max allowed min and max values
   const minLimit = 0;

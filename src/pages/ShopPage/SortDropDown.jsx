@@ -6,8 +6,8 @@ const sortOptions = [
   { label: "Flash Sale", value: "flashSale" },
   { label: "Alphabetically, A-Z", value: "alphabetical-AZ" },
   { label: "Alphabetically, Z-A", value: "alphabetical-ZA" },
-  { label: "Price, high to low", value: "priceAssending" },
-  { label: "Price, low to high", value: "priceDescending" },
+  { label: "Price, high to low", value: "priceDescending" },
+  { label: "Price, low to high", value: "priceAssending" },
 ];
 
 export default function SortDropDown() {

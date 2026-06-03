@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 
 export default function SizeFilterButton({ size }) {
+  const { updateSizeFilter, filters } = useFilteredProducts();
   const [isActive, setIsActive] = useState(false);
-  const { updateSizeFilter } = useFilteredProducts();
+
+  useEffect(() => {
+    if (filters.size) {
+      setIsActive(filters.size.includes(size));
+    }
+  }, [filters]);
 
   function handleClick() {
     setIsActive((prev) => !prev);

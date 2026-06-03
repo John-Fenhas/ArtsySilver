@@ -1,4 +1,3 @@
-import { button } from "framer-motion/client";
 import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 
 export default function Pagination() {
@@ -10,13 +9,44 @@ export default function Pagination() {
     prevPage,
     goToPage,
   } = useFilteredProducts();
-  console.log(totalPageCount);
+
+  const getPageNumbers = () => {
+    const pages = [];
+
+    if (totalPageCount <= 4) {
+      return Array.from({ length: totalPageCount }, (_, i) => i + 1);
+    }
+
+    // Always show first page
+    pages.push(1);
+
+    if (currrentPage > 3) {
+      pages.push("...");
+    }
+
+    // Show window around current page
+    const start = Math.max(2, currrentPage - 1);
+    const end = Math.min(totalPageCount - 1, currrentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (currrentPage < totalPageCount - 2) {
+      pages.push("...");
+    }
+
+    // Always show last page
+    pages.push(totalPageCount);
+
+    return pages;
+  };
 
   return (
     <div className="flex">
       {/*prev page btn*/}
       <button
-        className="w-12 h-12 flex justify-center items-center  rounded-l-xl border border-gray-300 cursor-pointer"
+        className="h-10 w-10 md:w-12 md:h-12 flex justify-center items-center rounded-l-xl border border-gray-300 cursor-pointer"
         onClick={() => prevPage()}
       >
         <svg
@@ -40,23 +70,32 @@ export default function Pagination() {
           </g>
         </svg>
       </button>
-      {Array.from({ length: totalPageCount }).map((_, i) => (
-        <button
-          className={
-            currrentPage === i + 1
-              ? `w-12 h-12 flex justify-center items-center border-2 border-gray-500 cursor-pointer`
-              : `w-12 h-12 flex justify-center items-center border-r border-y border-gray-300 cursor-pointer`
-          }
-          key={i}
-          onClick={() => goToPage(i + 1)}
-        >
-          {i + 1}
-        </button>
-      ))}
+      {getPageNumbers().map((page, i) =>
+        page === "..." ? (
+          <button
+            className={`h-10 w-10 md:w-12 md:h-12 flex justify-center items-center border-r border-y border-gray-300 cursor-pointer text-sm md:text-base`}
+            key={i}
+          >
+            ...
+          </button>
+        ) : (
+          <button
+            className={
+              currrentPage === i + 1
+                ? `h-10 w-10 md:w-12 md:h-12 flex justify-center items-center border-2 border-gray-500 cursor-pointer text-sm md:text-base`
+                : `h-10 w-10 md:w-12 md:h-12 flex justify-center items-center border-r border-y border-gray-300 cursor-pointer text-sm md:text-base`
+            }
+            key={i}
+            onClick={() => goToPage(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ),
+      )}
 
       {/*next page btn*/}
       <button
-        className="w-12 h-12 flex justify-center items-center rounded-r-xl border border-l-0 border-gray-300 cursor-pointer"
+        className="h-10 w-10 md:w-12 md:h-12 flex justify-center items-center rounded-r-xl border border-l-0 border-gray-300 cursor-pointer"
         onClick={() => nextPage()}
       >
         <svg
