@@ -276,8 +276,6 @@ export function FilteredProductsProvider({ children }) {
 
   //state update for the search temp results
   function updateSearchQuery(e) {
-    console.log(e);
-
     setSearchQuery(e.target.value.toLocaleLowerCase());
   }
 
