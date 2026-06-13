@@ -3,7 +3,7 @@ import { useFilteredProducts } from "../../Context/FilteredProductsContext";
 export default function Pagination() {
   const {
     totalPageCount,
-    currrentPage,
+    currentPage,
     isLoading,
     nextPage,
     prevPage,
@@ -20,19 +20,19 @@ export default function Pagination() {
     // Always show first page
     pages.push(1);
 
-    if (currrentPage > 3) {
+    if (currentPage > 3) {
       pages.push("...");
     }
 
     // Show window around current page
-    const start = Math.max(2, currrentPage - 1);
-    const end = Math.min(totalPageCount - 1, currrentPage + 1);
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPageCount - 1, currentPage + 1);
 
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
 
-    if (currrentPage < totalPageCount - 2) {
+    if (currentPage < totalPageCount - 2) {
       pages.push("...");
     }
 
@@ -81,7 +81,7 @@ export default function Pagination() {
         ) : (
           <button
             className={
-              currrentPage === i + 1
+              currentPage === i + 1
                 ? `h-10 w-10 md:w-12 md:h-12 flex justify-center items-center border-2 border-gray-500 cursor-pointer text-sm md:text-base`
                 : `h-10 w-10 md:w-12 md:h-12 flex justify-center items-center border-r border-y border-gray-300 cursor-pointer text-sm md:text-base`
             }
